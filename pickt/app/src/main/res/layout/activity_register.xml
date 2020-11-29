@@ -6,12 +6,9 @@
     android:layout_height="match_parent"
     android:gravity="center">
 
-    <Button
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="등록하기"
-        android:id="@+id/register_btn"
-        android:onClick="onRegisterClicked"/>
-
+        android:text="Register Activity"/>
 </LinearLayout>
