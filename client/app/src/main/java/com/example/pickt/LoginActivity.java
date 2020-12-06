@@ -10,27 +10,29 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
-    private EditText editText;
-    private EditText editText2;
+    private EditText emailEditText;
+    private EditText passwordEditText;
+    private Button signInButton;
+    private Button signUpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        editText = findViewById(R.id.editText);
-        editText2 = findViewById(R.id.editText2);
+        emailEditText = findViewById(R.id.editText);
+        passwordEditText = findViewById(R.id.editText2);
 
-        Button button3 = (Button) findViewById(R.id.button3);
-        button3.setOnClickListener(new View.OnClickListener() {
+        signInButton = (Button) findViewById(R.id.button3);
+        signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 gotoMainActivity(); //로그인 성공 시 메인 화면 전환, 실패 시 로그인 실패 메세
             }
         });
 
-        Button button4 = (Button) findViewById(R.id.button4);
-        button4.setOnClickListener(new View.OnClickListener(
+        signUpButton = (Button) findViewById(R.id.button4);
+        signUpButton.setOnClickListener(new View.OnClickListener(
         ) {
             @Override
             public void onClick(View v) {
