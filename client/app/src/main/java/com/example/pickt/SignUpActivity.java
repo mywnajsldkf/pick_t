@@ -42,7 +42,7 @@ public class SignUpActivity extends AppCompatActivity {
                 nickName = nickNameEditText.getText().toString();
                 phone = phoneEditText.getText().toString();
 
-                //gotoLoginActivity();
+                gotoLoginActivity();
             }
         });
     }
