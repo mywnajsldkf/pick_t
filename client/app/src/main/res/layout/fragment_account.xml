@@ -14,4 +14,11 @@
         android:id="@+id/register_btn"
         android:onClick="onRegisterClicked"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/chat_btn"
+        android:text="채팅하기"
+        android:onClick="onChatClicked"/>
+
 </LinearLayout>

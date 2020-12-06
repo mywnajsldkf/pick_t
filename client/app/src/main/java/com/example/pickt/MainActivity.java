@@ -2,16 +2,11 @@ package com.example.pickt;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
@@ -19,7 +14,6 @@ public class MainActivity extends AppCompatActivity {
     AccountFragment account;
     ChatFragment chat;
     HomeFragment home;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +26,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
-
         account = new AccountFragment();
         chat = new ChatFragment();
         home = new HomeFragment();
-
-
 
         getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, home).commitAllowingStateLoss();
 
@@ -62,7 +53,5 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 }
