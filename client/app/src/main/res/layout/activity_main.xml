@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="?attr/actionBarSize">
+
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/cardview_dark_background"
+        app:itemBackground="@color/cardview_dark_background"
+        app:itemIconTint="@drawable/item_color"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/menu_bottom"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="7dp"
+        tools:layout_editor_absoluteY="678dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
