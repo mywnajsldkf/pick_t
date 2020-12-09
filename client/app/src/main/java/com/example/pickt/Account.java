@@ -23,7 +23,7 @@ public class Account extends Fragment {
         register_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intentLoadActivity = new Intent(getActivity(), Register.class);
+                Intent intentLoadActivity = new Intent(getActivity(), RegisterActivity.class);
                 startActivity(intentLoadActivity);
             }
         });
