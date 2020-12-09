@@ -50,7 +50,7 @@ public class ChatActivity extends AppCompatActivity {
     private Socket mSocket;
     {
         try {
-            mSocket = IO.socket("http://10.0.2.2:3001/chat");
+            mSocket = IO.socket("http://10.0.2.2:3002/chat");
         } catch (URISyntaxException e) {}
     }
 

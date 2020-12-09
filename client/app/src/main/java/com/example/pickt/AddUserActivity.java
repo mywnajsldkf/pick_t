@@ -30,7 +30,7 @@ public class AddUserActivity extends AppCompatActivity {
     private Socket RoomSocket;
     {
         try {
-            RoomSocket = IO.socket("http://10.0.2.2:3001/room");
+            RoomSocket = IO.socket("http://10.0.2.2:3002/room");
         } catch (URISyntaxException e) {}
     }
     @Override
