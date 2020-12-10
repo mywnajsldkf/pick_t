@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddCarActivity">
+
+    <ScrollView
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/RegisterText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Register"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/font"/>
+
+            <ImageView
+                android:id="@+id/addImageView"
+                android:layout_width="372dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_baseline_add_24"
+                tools:ignore="VectorDrawableCompat"></ImageView>
+
+            <!--차량-->
+            <EditText
+                android:id="@+id/editName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="차량 이름"
+                android:textColorHint="#66000000"
+                android:maxLength="30"
+                android:fontFamily="@font/font"
+                android:backgroundTint="#000">
+            </EditText>
+
+            <!--면허-->
+            <EditText
+                android:id="@+id/editLicense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="면허 종류"
+                android:textColorHint="#66000000"
+               android:maxLength="30"
+                android:fontFamily="@font/font">
+            </EditText>
+
+            <EditText
+                android:id="@+id/accommodatedNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="수용 인원"
+                android:textColorHint="#66000000"
+                android:fontFamily="@font/font"
+                android:inputType="number"/>
+
+            <Button
+                android:id="@+id/accommodationBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="편의 시설 선택"
+                android:background="#8F406C3A"
+                android:textColor="#fff"
+                android:fontFamily="@font/font">
+            </Button>
+
+            <TextView
+                android:id="@+id/selected_text"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:fontFamily="@font/font">
+            </TextView>
+
+            <EditText
+                android:id="@+id/carDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="소개"
+                android:textColorHint="#66000000"
+                android:fontFamily="@font/font"/>
+
+            <Button
+                android:id="@+id/saveBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="등록하기"
+                android:background="#406C3A"
+                android:textColor="#fff"
+                android:fontFamily="@font/font"/>
+
+            <Button
+                android:id="@+id/listBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="리스트 보기"
+                android:textColor="#fff"
+                android:background="#406C3A"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/font"/>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
