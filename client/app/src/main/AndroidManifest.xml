@@ -20,10 +20,10 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".AddUserActivity" />
         <activity android:name=".ChatActivity" />
-        <activity android:name=".SplashActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
