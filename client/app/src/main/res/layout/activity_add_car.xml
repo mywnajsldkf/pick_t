@@ -18,98 +18,217 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/RegisterText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Register"
+                android:fontFamily="@font/font"
+                android:text="차량 등록하기"
                 android:textSize="30dp"
-                android:textStyle="bold"
-                android:fontFamily="@font/font"/>
+                android:textStyle="bold" />
 
-            <ImageView
+            <!--ImageView
                 android:id="@+id/addImageView"
                 android:layout_width="372dp"
                 android:layout_height="200dp"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/ic_baseline_add_24"
-                tools:ignore="VectorDrawableCompat"></ImageView>
+                tools:ignore="VectorDrawableCompat"/></ImageView-->
 
-            <!--차량-->
-            <EditText
+            <!--사진 등록-->
+            <Button
+                android:id="@+id/addImageView"
+                android:layout_width="268dp"
+                android:layout_height="138dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:text="사진추가하기"
+                android:textColor="#60000000"
+                android:background="#f0f0f0">
+            </Button>
+
+            <!--차량 정보 등-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="차량 정보"
+                android:textSize="25sp"
+                android:textColor="#454545"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="차량 대여전 대여자가 사전에 정보를 파익할 수 있도록 확인해주세요."
+                android:textSize="16sp"
+                />
+
+            <!--차량 이름-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="차량 이름"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+          <EditText
                 android:id="@+id/editName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="차량 이름"
-                android:textColorHint="#66000000"
+                android:layout_marginTop="10dp"
+                android:hint="ex) 블루밴 마이크로 XA"
+                android:textColorHint="#a7000000"
                 android:maxLength="30"
                 android:fontFamily="@font/font"
-                android:backgroundTint="#000">
+                android:ellipsize="end"
+                android:singleLine="true">
             </EditText>
 
             <!--면허-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="면허 종류"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
             <EditText
                 android:id="@+id/editLicense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="면허 종류"
-                android:textColorHint="#66000000"
-               android:maxLength="30"
-                android:fontFamily="@font/font">
+                android:layout_marginTop="10dp"
+                android:hint="ex) 1종 보통"
+                android:textColorHint="#a7000000"
+                android:maxLength="30"
+                android:fontFamily="@font/font"
+                android:ellipsize="end"
+                android:singleLine="true">
             </EditText>
+
+            <!--대여점-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="대여점"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/editRent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="ex) 전남대점"
+                android:textColorHint="#a7000000"
+                android:maxLength="30"
+                android:fontFamily="@font/font"
+                android:ellipsize="end"
+                android:singleLine="true">
+            </EditText>
+
+            <!-- 정보 등-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="편의 정보"
+                android:textSize="25sp"
+                android:textColor="#454545"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="수용인원, 편의시설 등을 작성해주세요."
+                android:textSize="16sp"
+                />
+
+            <!--수용인-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="수용 인원"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/accommodatedNum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="수용 인원"
-                android:textColorHint="#66000000"
+                android:layout_marginTop="10dp"
+                android:hint="ex) 4"
+                android:textColorHint="#a7000000"
+                android:maxLength="30"
                 android:fontFamily="@font/font"
-                android:inputType="number"/>
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:inputType="number">
+            </EditText>
 
-            <Button
+            <!--대여점-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="편의 시설"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+            <EditText
                 android:id="@+id/accommodationBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="편의 시설 선택"
-                android:background="#8F406C3A"
-                android:textColor="#fff"
-                android:fontFamily="@font/font">
-            </Button>
+                android:layout_marginTop="10dp"
+                android:hint="ex) 인덕션, 화장실"
+                android:textColorHint="#a7000000"
+                android:maxLength="30"
+                android:fontFamily="@font/font"
+                android:ellipsize="end"
+                android:singleLine="true">
+            </EditText>
+
+
+            <!--차량 설명-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="차량 설명"
+                android:textSize="25sp"
+                android:textColor="#454545"
+                />
 
             <TextView
-                android:id="@+id/selected_text"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:fontFamily="@font/font">
-            </TextView>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="자신의 차량을 소개해주세요."
+                android:textSize="16sp"
+                />
+
+            <!--차량 설명-->
 
             <EditText
                 android:id="@+id/carDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="소개"
-                android:textColorHint="#66000000"
-                android:fontFamily="@font/font"/>
+                android:layout_marginTop="40dp"
+                android:hint="자신의 차량을 소개해주세요."
+                android:textColorHint="#a7000000"
+                android:maxLength="30"
+                android:fontFamily="@font/font"
+                android:ellipsize="end"
+                android:singleLine="true">
+            </EditText>
 
-            <Button
-                android:id="@+id/saveBtn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="등록하기"
-                android:background="#406C3A"
-                android:textColor="#fff"
-                android:fontFamily="@font/font"/>
-
-            <Button
-                android:id="@+id/listBtn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="리스트 보기"
-                android:textColor="#fff"
-                android:background="#406C3A"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/font"/>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
