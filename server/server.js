@@ -21,7 +21,7 @@ dotenv.config({
 
 connectDB();
 
-app.use('/api/todo/auth',require('./routes/user'));
+app.use('/api/pickt/auth',require('./routes/user'));
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT,
