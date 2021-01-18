@@ -3,6 +3,7 @@ const dotenv = require('dotenv')
 const connectDB = require('./config/db')
 const colors = require('colors')
 const morgan = require('morgan')
+const router = require('./routes/user')
 
 const app = express();
 
@@ -21,7 +22,7 @@ dotenv.config({
 
 connectDB();
 
-app.use('/api/pickt/auth',require('./routes/user'));
+app.use('/api/pickt/auth', router);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT,

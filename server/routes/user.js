@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const { token } = require('morgan');
 
 
-router.post('/test', function(req, res, next) {
+router.get('/test', function(req, res, next) {
   res.json({
     msg: 'Working'
   });
@@ -133,4 +133,4 @@ router.post('/login',async(req,res,next)=>{
     }
 });
 
-module.exports = router;
+module.exports = router; //user.js 라는 파일이 모듈로써 동작하기 위해서는 이 파일을 밖으로 누구를 export할
