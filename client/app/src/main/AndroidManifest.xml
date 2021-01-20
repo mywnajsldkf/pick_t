@@ -15,7 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".AddCarActivity" />
-        <activity android:name=".RegisterActivity" />
         <activity android:name=".AddUserActivity" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".SplashActivity" />
