@@ -8,15 +8,18 @@
     tools:context=".AddCarActivity">
 
     <ScrollView
-        android:layout_margin="20dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
         <LinearLayout
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:orientation="vertical">
 
             <TextView
@@ -271,15 +274,14 @@
             <Button
                 android:id="@+id/registerCarBtn"
                 android:layout_marginTop="50dp"
+                android:layout_marginBottom="100dp"
                 android:layout_width="115dp"
                 android:layout_height="41dp"
                 android:layout_gravity="center"
                 android:textColor="#ffffff"
                 android:background="@drawable/btn_shape"
                 android:text="등록하기"
-                android:fontFamily="sans-serif"
-
-                />
+                android:fontFamily="sans-serif"/>
 
         </LinearLayout>
     </ScrollView>
