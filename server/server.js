@@ -7,7 +7,7 @@ const router = require('./routes/user')
 
 const app = express();
 
-app.use(morgan('dev')); //로그 포맷을 'dev'지정
+app.use(morgan('combined')); //로그 포맷을 'dev'지정
 
 app.use(express.json({})); //Express v4.16.0 부터는 json으로 이루어진 request body를 받기 위해서 body-parser가 아닌 express.json 사용
 app.use(express.json({

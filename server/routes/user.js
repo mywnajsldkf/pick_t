@@ -33,8 +33,6 @@ router.get('/users',user_jwt,async(req,res, next)=>{
 router.post('/users',async (req, res, next)=>{
     const{username, email, password, nickname, phone} = req.body;
 
-    console.log(req.body);
-
     try{
         let user_exits = await User.findOne({email: email})
 
