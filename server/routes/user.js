@@ -133,6 +133,13 @@ router.post('/login',async(req,res,next)=>{
     }
 });
 
+router.get('/users/:id/trailers', async(req,res,next) => {
+  const userId = req.params['id'];
+  res.status(200).json({
+    msg: userId
+  });
+});
+
 
 
 module.exports = router; //user.js 라는 파일이 모듈로써 동작하기 위해서는 이 파일을 밖으로 누구를 export할 수 있음.
