@@ -19,6 +19,7 @@ router.get('/users',user_jwt,async(req,res, next)=>{
             res.status(200).json({
                 success: true,
                 user: user
+                request: req.body
             });
     }catch(error){
         console.log(error.message);
