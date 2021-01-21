@@ -193,7 +193,7 @@
                 />
 
             <EditText
-                android:id="@+id/accommodatedNum"
+                android:id="@+id/editNum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -208,7 +208,6 @@
                 android:colorControlNormal="#2cdedede">
             </EditText>
 
-            <!--대여점-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -219,7 +218,7 @@
                 android:textStyle="bold"/>
 
             <EditText
-                android:id="@+id/accommodationBtn"
+                android:id="@+id/editFacility"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

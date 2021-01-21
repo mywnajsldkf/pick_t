@@ -23,6 +23,8 @@ connectDB();
 
 app.use('/api/todo/auth',require('./routes/user'));
 
+app.use('/api/trailers', require('./routes/trailers'));
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT,
     console.log(`Server running mode on port ${PORT}`.red.underline.bold)

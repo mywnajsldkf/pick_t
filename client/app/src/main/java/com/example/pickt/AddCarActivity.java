@@ -27,6 +27,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
@@ -42,6 +51,16 @@ import java.util.Map;
 public class AddCarActivity extends AppCompatActivity {
     private final int GET_GALLERY_IMAGE = 200;
     private ImageView imageButton;
+    private Button registerButton;
+
+    private EditText editTextName;
+    private EditText editTextLicense;
+    private EditText editTextRent;
+    private EditText editTextCost;
+    private EditText editTextNum;
+    private EditText editTextFacility;
+
+    String name, license, rent, cost, num, facility;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +68,14 @@ public class AddCarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_car);
 
         imageButton = (ImageView) findViewById(R.id.addImageView);
+        registerButton = (Button)findViewById(R.id.registerCarBtn);
+
+        editTextName = (EditText)findViewById(R.id.editName);
+        editTextLicense = (EditText)findViewById(R.id.editLicense);
+        editTextRent = (EditText)findViewById(R.id.editRent);
+        editTextCost = (EditText)findViewById(R.id.editCost);
+        editTextNum = (EditText)findViewById(R.id.editNum);
+        editTextFacility = (EditText)findViewById(R.id.editFacility);
 
         // 사진 추가
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +87,64 @@ public class AddCarActivity extends AppCompatActivity {
                 startActivityForResult(intent, GET_GALLERY_IMAGE);
             }
         });
+
+        // 차량 등록 버튼 클릭
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                name = editTextName.getText().toString();
+                license = editTextLicense.getText().toString();
+                rent = editTextRent.getText().toString();
+                cost = editTextCost.getText().toString();
+                num = editTextNum.getText().toString();
+                facility = editTextFacility.getText().toString();
+
+                requestRegister(name, license, rent, cost, num, facility);
+            }
+        });
+    }
+
+    // 요청
+    public void requestRegister(String name, String license, String rent, String cost, String num, String facility){
+        // 우선 localhost 설정
+        String url = "http://localhost:3001/";
+
+        JSONObject carjson = new JSONObject();
+        try {
+            carjson.put("name", name);
+            carjson.put("license", license);
+            carjson.put("rent", rent);
+            carjson.put("cost", cost);
+            carjson.put("num", num);
+            carjson.put("facility", facility);
+            String resultJson = carjson.toString();
+
+            final RequestQueue requestQueue = Volley.newRequestQueue(AddCarActivity.this);
+            final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, carjson, new Response.Listener<JSONObject>() {
+
+                // 데이터 전달 후 응답을 받을
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.toString());
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    error.printStackTrace();
+                }
+            });
+            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS, DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            requestQueue.add(jsonObjectRequest);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
