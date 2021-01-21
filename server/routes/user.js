@@ -8,7 +8,6 @@ const { token } = require('morgan');
 
 
 router.post('/test', function(req, res, next) {
-  console.log(req.body);
   res.json({
     msg: 'Working'
   });
