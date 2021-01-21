@@ -1,7 +1,7 @@
 const express = require('express')
 const dotenv = require('dotenv') //.env 파일에서 process.env로 환경 변수를 로드하는 모듈
 const connectDB = require('./config/db')
-const colors = require('colors') //터미널에 컬러를 넣어 보여
+const colors = require('colors') //터미널에 컬러를 넣어 보여줌.
 const morgan = require('morgan') // HTTP request logger middleware(로그 포맷을 지정)
 const router = require('./routes/user')
 
@@ -22,7 +22,7 @@ dotenv.config({
 
 connectDB();
 
-app.use('/api/pickt/auth', router);
+app.use('/api/pickt', router);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT,
