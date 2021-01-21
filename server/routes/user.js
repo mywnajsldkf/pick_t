@@ -8,6 +8,7 @@ const { token } = require('morgan');
 
 
 router.post('/test', function(req, res, next) {
+  console.log(req.body);
   res.json({
     msg: 'Working'
   });
@@ -19,7 +20,6 @@ router.get('/users',user_jwt,async(req,res, next)=>{
             res.status(200).json({
                 success: true,
                 user: user
-                console.log(req.body)
             });
     }catch(error){
         console.log(error.message);
@@ -133,5 +133,7 @@ router.post('/login',async(req,res,next)=>{
         })
     }
 });
+
+
 
 module.exports = router; //user.js 라는 파일이 모듈로써 동작하기 위해서는 이 파일을 밖으로 누구를 export할 수 있음.
