@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="license">
-        <item>1종/2종 보통면허</item>
-        <item>1종 대형면허</item>
-        <item>1종 특수면허</item>
-    </string-array>
-</resources>
