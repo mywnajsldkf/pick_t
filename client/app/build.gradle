@@ -2,6 +2,10 @@ plugins {
     id 'com.android.application'
 }
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
