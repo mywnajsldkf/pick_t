@@ -134,29 +134,29 @@ router.post('/login',async(req,res,next)=>{
     }
 });
 
-router.post('/users/:id/trailers', async(req,res,next) => {
-  const userId = req.params['id'];
-  const{trailerName, license, rentalPlace, capacity, facilities, description} = req.body;
-
-  try {
-    let trailer = new Trailer();
-
-
-
-    trailer.trailerName = trailerName;
-    trailer.license = license;
-    trailer.rentalPlace = rentalPlace;
-    trailer.capacity = capacity;
-    trailer.facilities = facilities;
-    trailer.description = description;
-
-    await trailer.save();
-
-  } catch(error) {
-    console.log(error);
-  }
-
-});
+// router.post('/users/:id/trailers', async(req,res,next) => {
+//   const userId = req.params['id'];
+//   const{trailerName, license, rentalPlace, capacity, facilities, description} = req.body;
+//
+//   try {
+//     let trailer = new Trailer();
+//
+//
+//
+//     trailer.trailerName = trailerName;
+//     trailer.license = license;
+//     trailer.rentalPlace = rentalPlace;
+//     trailer.capacity = capacity;
+//     trailer.facilities = facilities;
+//     trailer.description = description;
+//
+//     await trailer.save();
+//
+//   } catch(error) {
+//     console.log(error);
+//   }
+//
+// });
 
 
 
