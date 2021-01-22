@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const Trailer = require('../models/Trailer');
 const bcryptjs = require('bcryptjs');
 const user_jwt = require('../middleware/user_jwt');
 const jwt = require('jsonwebtoken');
@@ -133,12 +134,30 @@ router.post('/login',async(req,res,next)=>{
     }
 });
 
-router.get('/users/:id/trailers', async(req,res,next) => {
+router.post('/users/:id/trailers', async(req,res,next) => {
   const userId = req.params['id'];
-  res.status(200).json({
-    msg: userId
-  });
+  const{trailerName, license, rentalPlace, capacity, facilities, description} = req.body;
+
+  try {
+    let trailer = new Trailer();
+
+
+
+    trailer.trailerName = trailerName;
+    trailer.license = license;
+    trailer.rentalPlace = rentalPlace;
+    trailer.capacity = capacity;
+    trailer.facilities = facilities;
+    trailer.description = description;
+
+    await trailer.save();
+
+  } catch(error) {
+    console.log(error);
+  }
+
 });
+
 
 
 
