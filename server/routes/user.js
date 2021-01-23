@@ -1,22 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
-//const Trailer = require('../models/Trailer');
+// const Trailer = require('../models/Trailer');
 const bcryptjs = require('bcryptjs');
 const user_jwt = require('../middleware/user_jwt');
 const jwt = require('jsonwebtoken');
 const { token } = require('morgan');
 
-
-router.post('/test', function(req, res, next) {
-  res.json({
-    msg: 'Working'
-  });
-});
-
 router.get('/users',user_jwt,async(req,res, next)=>{
     try{
-        const user = await User.findById(req.user.id).select('-password');
+        const user = await User.findById(req.user.id).select('-password -_id -username -__v');
             res.status(200).json({
                 success: true,
                 user: user
@@ -141,8 +134,7 @@ router.post('/login',async(req,res,next)=>{
 //   try {
 //     let trailer = new Trailer();
 //
-//
-//
+//     trailer.userId = userId;
 //     trailer.trailerName = trailerName;
 //     trailer.license = license;
 //     trailer.rentalPlace = rentalPlace;
