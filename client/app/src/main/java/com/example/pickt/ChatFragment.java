@@ -38,14 +38,6 @@ public class ChatFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chat , container, false);
 
-        button = (Button) view.findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentLoadActivity = new Intent(getActivity(), AddUserActivity.class);
-                startActivity(intentLoadActivity);
-            }
-        });
         return view;
     }
 }

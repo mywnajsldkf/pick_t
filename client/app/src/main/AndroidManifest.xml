@@ -16,8 +16,6 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".DetailCarActivity"></activity>
         <activity android:name=".AddCarActivity" />
-        <activity android:name=".AddUserActivity" />
-        <activity android:name=".ChatActivity" />
         <activity android:name=".SplashActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity" />

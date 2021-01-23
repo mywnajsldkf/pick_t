@@ -1,5 +1,6 @@
 package com.example.pickt;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,10 +16,12 @@ import androidx.fragment.app.Fragment;
 
 import com.example.pickt.UtilsService.SharedPreferenceClass;
 
+import org.w3c.dom.Text;
+
 public class AccountFragment extends Fragment {
     MainActivity mainActivity;
-    //private Button logoutButton;
     private TextView registerBtn;
+    private TextView logoutBtn;
 
     SharedPreferenceClass sharedPreferenceClass;
 
@@ -36,6 +39,7 @@ public class AccountFragment extends Fragment {
         mainActivity = null;
     }
 
+    @SuppressLint("WrongViewCast")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,7 +47,7 @@ public class AccountFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
 
         registerBtn = (TextView) view.findViewById(R.id.registerCar);
-        //logoutButton = (Button) view.findViewById(R.id.logoutButton);
+        logoutBtn = (TextView) view.findViewById(R.id.logoutBtn);
         sharedPreferenceClass = new SharedPreferenceClass(mainActivity);
 
         registerBtn.setOnClickListener(new View.OnClickListener(){
@@ -55,8 +59,7 @@ public class AccountFragment extends Fragment {
             }
         });
 
-        /*
-        logoutButton.setOnClickListener(new View.OnClickListener() {
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sharedPreferenceClass.clear();
@@ -64,7 +67,6 @@ public class AccountFragment extends Fragment {
                 getActivity().finish();
             }
         });
-         */
 
         return view;
     }

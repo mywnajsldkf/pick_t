@@ -63,12 +63,6 @@ public class HomeFragment extends Fragment {
                 // 더블 탭 -> 다음 차량 이동
                 if (pressTime - lastPressTime <= DOUBLE_PRESS_INTERVAL){
 
-                    /*
-                    Intent intentLoadActivity = new Intent(getActivity(), DetailCarActivity.class);
-                    intentLoadActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intentLoadActivity);
-
-                     */
                     Toast.makeText(getContext(), "관심 차량으로 등록되었습니다", Toast.LENGTH_SHORT).show();
                     mHasDoubleClicked = true;
                 }
@@ -78,7 +72,11 @@ public class HomeFragment extends Fragment {
                     Handler tabHandler = new Handler() {
                         public void handleMessage(Message m) {
                             if (!mHasDoubleClicked) {
-                                Toast.makeText(getContext(), "다음 액티비티로 전환됩니다.", Toast.LENGTH_SHORT).show();
+
+                                Intent intentLoadActivity = new Intent(getActivity(), DetailCarActivity.class);
+                                intentLoadActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intentLoadActivity);
+                                // Toast.makeText(getContext(), "다음 액티비티로 전환됩니다.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     };

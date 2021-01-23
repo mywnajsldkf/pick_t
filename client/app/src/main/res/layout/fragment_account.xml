@@ -159,7 +159,7 @@
                 android:text="차량 등록">
             </TextView>
             <TextView
-                android:id="@+id/logout"
+                android:id="@+id/logoutBtn"
                 android:layout_marginTop="14dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
