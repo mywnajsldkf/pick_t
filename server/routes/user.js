@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
-// const Trailer = require('../models/Trailer');
+//const Trailer = require('../models/Trailer');
 const bcryptjs = require('bcryptjs');
 const user_jwt = require('../middleware/user_jwt');
 const jwt = require('jsonwebtoken');
@@ -12,7 +12,8 @@ router.get('/users',user_jwt,async(req,res, next)=>{
         const user = await User.findById(req.user.id).select('-password -_id -username -__v');
             res.status(200).json({
                 success: true,
-                user: user
+                user: user,
+                user2: req.user.id
             });
     }catch(error){
         console.log(error.message);
