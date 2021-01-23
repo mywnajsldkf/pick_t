@@ -14,6 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".DetailCarActivity"></activity>
         <activity android:name=".AddCarActivity" />
         <activity android:name=".AddUserActivity" />
         <activity android:name=".ChatActivity" />

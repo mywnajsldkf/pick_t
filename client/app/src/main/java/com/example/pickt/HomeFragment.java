@@ -3,23 +3,20 @@ package com.example.pickt;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.melnykov.fab.FloatingActionButton;
-
-import java.util.ArrayList;
 
 
 public class HomeFragment extends Fragment {
@@ -27,11 +24,15 @@ public class HomeFragment extends Fragment {
     FloatingActionButton addCar;
     RecyclerView recyclerView;
 
-    private long cardPressTime = 0;
+    public static final long DOUBLE_PRESS_INTERVAL = 250;  // milli-seconds
+    public long lastPressTime;
+
+    public boolean mHasDoubleClicked = false;
+
     private Toast toast;
 
-    // private ArrayList<String> carData = null;
-
+    GestureDetector gd;
+    GestureDetector.OnDoubleTapListener listener;
 
     @Nullable
     @Override
@@ -55,18 +56,37 @@ public class HomeFragment extends Fragment {
         MyCarAdapter myCarAdapter = new MyCarAdapter(myCarData, HomeFragment.this);
         recyclerView.setAdapter(myCarAdapter);
 
-        // car 더블 클릭 기능
         myCarAdapter.setOnItemClickListener(new MyCarAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View v, int position) {
-                if (System.currentTimeMillis() > cardPressTime + 1000){
-                    cardPressTime = System.currentTimeMillis();
-                    Toast.makeText(getContext(), "한번 더 터치해주세요!", Toast.LENGTH_LONG).show();
+            public boolean onItemClick(View v, int position) {
+                long pressTime = System.currentTimeMillis();
+                // 더블 탭 -> 다음 차량 이동
+                if (pressTime - lastPressTime <= DOUBLE_PRESS_INTERVAL){
+
+                    /*
+                    Intent intentLoadActivity = new Intent(getActivity(), DetailCarActivity.class);
+                    intentLoadActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intentLoadActivity);
+
+                     */
+                    Toast.makeText(getContext(), "관심 차량으로 등록되었습니다", Toast.LENGTH_SHORT).show();
+                    mHasDoubleClicked = true;
                 }
-                if (System.currentTimeMillis() <= cardPressTime + 1000){
-                    Toast.makeText(getContext(), "두번 탭 성공하셨습니다.", Toast.LENGTH_LONG).show();
-                    return;
+                // 한번 탭 -> 다음 액티비티로 전환
+                else {
+                    mHasDoubleClicked = false;
+                    Handler tabHandler = new Handler() {
+                        public void handleMessage(Message m) {
+                            if (!mHasDoubleClicked) {
+                                Toast.makeText(getContext(), "다음 액티비티로 전환됩니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    };
+                    Message m = new Message();
+                    tabHandler.sendMessageDelayed(m, DOUBLE_PRESS_INTERVAL);
                 }
+                lastPressTime = pressTime;
+                return true;
             }
         });
 
