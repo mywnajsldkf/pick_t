@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,10 +12,29 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class MyCarAdapter extends RecyclerView.Adapter<MyCarAdapter.ViewHolder>{
 
+    // 어탭너 내에서 리스터 인터페이스 정의
+    public interface OnItemClickListener {
+        void onItemClick(View v, int position);
+    }
+
+    // 리스너 객체 전달 메서드와 변수 추가
+    private OnItemClickListener mListener = null;
+
+    // OnItemClickListener 리스너 객체 참조를 어댑터에 전달하는 메서드
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.mListener = listener;
+    }
+
     MyCarData[] myCarData;
+
     HomeFragment context;
+
+    private long cardPressTime = 0;
+    private Toast toast;
 
     public MyCarAdapter(MyCarData[] myCarData, HomeFragment fragment){
         this.myCarData = myCarData;
@@ -39,12 +59,14 @@ public class MyCarAdapter extends RecyclerView.Adapter<MyCarAdapter.ViewHolder>{
         holder.textViewRent.setText(myCarDataList.getCarRentText());
         holder.textViewCost.setText(myCarDataList.getCarCostText());
 
+        /*
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 // Toast.makeText(context, myCarDataList.getCarNameText(), Toast.LENGTH_SHORT).show();
             }
         });
+         */
     }
 
     @Override
@@ -58,12 +80,27 @@ public class MyCarAdapter extends RecyclerView.Adapter<MyCarAdapter.ViewHolder>{
         TextView textViewRent;
         TextView textViewCost;
 
-        public ViewHolder(@NonNull View itemView){
-            super(itemView);
-            carImage = itemView.findViewById(R.id.carImage);
-            textViewName = itemView.findViewById(R.id.carNameText);
-            textViewRent = itemView.findViewById(R.id.carRentText);
-            textViewCost = itemView.findViewById(R.id.carCostText);
+
+         ViewHolder(@NonNull View itemView){
+             super(itemView);
+
+             carImage = itemView.findViewById(R.id.carImage);
+             textViewName = itemView.findViewById(R.id.carNameText);
+             textViewRent = itemView.findViewById(R.id.carRentText);
+             textViewCost = itemView.findViewById(R.id.carCostText);
+
+             // 아이템 클릭 이벤트 핸들러 메서드에서 객체 메서드 호출
+             itemView.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+                     int position = getAdapterPosition();
+                     if (position != RecyclerView.NO_POSITION){
+                         if (mListener != null){
+                             mListener.onItemClick(v, position);
+                         }
+                     }
+                }
+            });
         }
     }
 }
