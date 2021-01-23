@@ -76,7 +76,7 @@ router.post('/login',async(req,res,next)=>{
     const password = req.body.password;
 
     try{
-        let user = await User.findOne.select('-password -__v')({
+        let user = await User.findOne.select('-__v')({
             email: email
         });
 
