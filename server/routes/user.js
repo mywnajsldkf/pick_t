@@ -7,7 +7,7 @@ const user_jwt = require('../middleware/user_jwt');
 const jwt = require('jsonwebtoken');
 const { token } = require('morgan');
 
-router.get('/users',async(req,res, next)=>{
+router.get('/users', user_jwt, async(req,res, next)=>{
     try{
         const user = await User.findById(req.user.id).select('-password -_id -username -__v');
             res.status(200).json({
