@@ -24,7 +24,7 @@ router.get('/users', user_jwt, async(req,res, next)=>{
     }
 })
 
-router.get('/users/check', user_jwt, async(req, res, next) => {
+router.post('/users/check', user_jwt, async(req, res, next) => {
   let nickName = req.body('nickname');
   let phone = req.body('phone');
   let license = req.body('license');
