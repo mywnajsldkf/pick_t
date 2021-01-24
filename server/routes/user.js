@@ -7,22 +7,22 @@ const user_jwt = require('../middleware/user_jwt');
 const jwt = require('jsonwebtoken');
 const { token } = require('morgan');
 
-router.get('/users',user_jwt,async(req,res, next)=>{
-    try{
-        const user = await User.findById(req.user.id).select('-password -_id -username -__v');
-            res.status(200).json({
-                success: true,
-                user: user
-            });
-    }catch(error){
-        console.log(error.message);
-        res.status(500).json({
-            success: false,
-            msg: 'Server Error'
-        })
-        next();
-    }
-})
+// router.get('/users',user_jwt,async(req,res, next)=>{
+//     try{
+//         const user = await User.findById(req.user.id).select('-password -_id -username -__v');
+//             res.status(200).json({
+//                 success: true,
+//                 user: user
+//             });
+//     }catch(error){
+//         console.log(error.message);
+//         res.status(500).json({
+//             success: false,
+//             msg: 'Server Error'
+//         })
+//         next();
+//     }
+// })
 
 router.get('/users', user_jwt, async(req, res, next) => {
   const{nickName, phone, license, email} = req.body;
