@@ -12,8 +12,7 @@ router.get('/users',user_jwt,async(req,res, next)=>{
         const user = await User.findById(req.user.id).select('-password -_id -username -__v');
             res.status(200).json({
                 success: true,
-                user: user,
-                user2: req.user.id
+                user: user
             });
     }catch(error){
         console.log(error.message);
@@ -23,6 +22,18 @@ router.get('/users',user_jwt,async(req,res, next)=>{
         })
         next();
     }
+})
+
+router.get('/users', user_jwt, async(req, res, next) => {
+  const{nickName, phone, license, email} = req.body;
+
+  res.status(200).json({
+    success: true,
+    nickname: nickName,
+    phone: phone,
+    license: license,
+    email: email
+  });
 })
 
 router.post('/users',async (req, res, next)=>{
