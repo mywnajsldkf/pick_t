@@ -7,33 +7,44 @@ const user_jwt = require('../middleware/user_jwt');
 const jwt = require('jsonwebtoken');
 const { token } = require('morgan');
 
-// router.get('/users',user_jwt,async(req,res, next)=>{
-//     try{
-//         const user = await User.findById(req.user.id).select('-password -_id -username -__v');
-//             res.status(200).json({
-//                 success: true,
-//                 user: user
-//             });
-//     }catch(error){
-//         console.log(error.message);
-//         res.status(500).json({
-//             success: false,
-//             msg: 'Server Error'
-//         })
-//         next();
-//     }
-// })
+router.get('/users',async(req,res, next)=>{
+    try{
+        const user = await User.findById(req.user.id).select('-password -_id -username -__v');
+            res.status(200).json({
+                success: true,
+                user: user
+            });
+    }catch(error){
+        console.log(error.message);
+        res.status(500).json({
+            success: false,
+            msg: 'Server Error'
+        })
+        next();
+    }
+})
 
-router.get('/users', user_jwt, async(req, res, next) => {
-  const{nickName, phone, license, email} = req.body;
+router.get('/users/check', user_jwt, async(req, res, next) => {
+  let nickName = req.header('nickname');
+  let phone = req.header('phone');
+  let license = req.header('license');
+  let email = req.header('email');
 
-  res.status(200).json({
-    success: true,
-    nickname: nickName,
-    phone: phone,
-    license: license,
-    email: email
-  });
+  try {
+    res.status(200).json({
+      success: true,
+      nickname: nickName,
+      phone: phone,
+      license: license,
+      email: email
+    });
+  } catch(error) {
+    res.status(500).json({
+      success: false,
+      msg: 'Server Error'
+    })
+    next();
+  }
 })
 
 router.post('/users',async (req, res, next)=>{
