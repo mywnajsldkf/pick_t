@@ -24,7 +24,7 @@ router.post('/register', function(req, res){
     },
     function(err, trailer){
         if(err) return res.status(500).send("User 생성 실패");
-        res.status(200).send("User 생성 실패")
+        res.status(200).send(trailer);
     });
 });
 
