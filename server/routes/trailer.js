@@ -34,4 +34,28 @@ router.post('/trailers', user_jwt, async(req,res,next) => {
 
 });
 
+router.get('/trailers', user_jwt, async(req,res,next) => {
+  try {
+    const trailers = await Trailer.find();
+
+    if(!trailers) {
+      res.status(400).json({
+        success: false,
+        msg: 'Something went wrong'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      totalNumberOfTrailers: trailers.length,
+      trailer: trailers,
+      msg: 'Successfully fetch ed'
+    });
+  } catch(error) {
+    next(error);
+  }
+});
+
+
+
 module.exports = router;
