@@ -8,7 +8,7 @@ const { token } = require('morgan');
 
 router.get('/users', user_jwt, async(req, res, next) => {
     try {
-        const user = await User.findById(req.user.id).select('-password -_id -username -__v');
+        const user = await User.findById(req.user.id).select('-password -username -__v');
             res.status(200).json({
                 success: true,
                 user: user
@@ -128,7 +128,7 @@ router.post('/login', async(req, res, next) => {
     }
 });
 
-router.put('/users/:id', async(req, res, next) => {
+router.put('/users/:id', user_jwt, async(req, res, next) => {
   try {
     let user = await User.findById(req.params.id);
 
