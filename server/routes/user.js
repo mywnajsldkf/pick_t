@@ -53,9 +53,10 @@ router.post('/users',async(req, res, next) => {
         const payload = {
             user: {
                 id: user.id
-                console.log(user.id);
             }
         }
+
+        console.log(user.id);
 
         jwt.sign(payload, process.env.jwtUserSecret, {
             expiresIn: 360000
