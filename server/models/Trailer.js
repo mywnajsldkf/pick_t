@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const trailerSchema = new mongoose.Schema({
   userId: {
     type: mongoose.SchemaTypes.ObjectId,
-    ref: "User"
+    ref: 'User'
   },
 
   reportingDate: {
