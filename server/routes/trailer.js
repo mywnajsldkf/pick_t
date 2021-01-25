@@ -4,27 +4,34 @@ const Trailer = require('../models/Trailer');
 const bcryptjs = require('bcryptjs');
 const user_jwt = require('../middleware/user_jwt');
 
-// router.post('/users/:id/trailers', async(req,res,next) => {
-//   const userId = req.params['id'];
-//   const{trailerName, license, rentalPlace, capacity, facilities, description} = req.body;
-//
-//   try {
-//     let trailer = new Trailer();
-//
-//     trailer.userId = userId;
-//     trailer.trailerName = trailerName;
-//     trailer.license = license;
-//     trailer.rentalPlace = rentalPlace;
-//     trailer.capacity = capacity;
-//     trailer.facilities = facilities;
-//     trailer.description = description;
-//
-//     await trailer.save();
-//
-//   } catch(error) {
-//     console.log(error);
-//   }
-//
-// });
+router.post('/trailers', async(req,res,next) => {
+  try {
+    const trailer = await Trailer.create({
+      userId: req.body.userId,
+      trailerName: req.body.trailerName,
+      license: req.body.license,
+      rentalPlace: req.body.rentalPlace,
+      capacity: req.body.capacity,
+      facilities: req.body.facilities,
+      description: req.body.description
+    });
+
+    if(!trailer) {
+      res.status(400).json({
+        success: false,
+        msg: 'Something went wrong'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      trailer: trailer,
+      msg: 'Successfully created'
+    });
+  } catch(error) {
+    next(error);
+  }
+
+});
 
 module.exports = router;
