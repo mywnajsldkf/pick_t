@@ -8,12 +8,10 @@ const { token } = require('morgan');
 
 router.get('/users', user_jwt, async(req, res, next) => {
     try {
-        const user = await User.findById(req.user.id).select('-password -username -__v');
+        const user = await User.findById(req.user.id).select('-password -_id -username -__v');
             res.status(200).json({
                 success: true,
-                user: user,
-                userInfo: user._id,
-                userInfo2: req.user.id
+                user: user
             });
     } catch(error) {
         console.log(error.message);
@@ -57,6 +55,7 @@ router.post('/users',async(req, res, next) => {
         }
 
         console.log(user.id);
+        console.log(user._id);
 
         jwt.sign(payload, process.env.jwtUserSecret, {
             expiresIn: 360000
