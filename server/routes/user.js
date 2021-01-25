@@ -128,27 +128,38 @@ router.post('/login', async(req, res, next) => {
     }
 });
 
-router.post('/users/check', user_jwt, async(req, res, next) => {
-  let nickName = req.body('nickname');
-  let phone = req.body('phone');
-  let license = req.body('license');
-  let email = req.body('email');
-
+router.put('/users/:id', async(req, res, next) => {
   try {
-    res.status(200).json({
-      success: true,
-      nickname: nickName,
-      phone: phone,
-      license: license,
-      email: email
+    let user = await User.findById(req.params.id);
+
+    if(!user) {
+      res.status(400).json({
+        success: false,
+        msg: 'UserInfo not exists'
+      });
+    }
+
+    user = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true
     });
+
+    if(!user) {
+      res.status(400).json({
+        success: false,
+        msg: 'Something went wrong.'
+      });
+    }
+
+    res.status.json({
+      success: true,
+      user: user,
+      msg: 'Successfully updated'
+    });
+
   } catch(error) {
-      console.log(error.message);
-      res.status(500).json({
-          success: false,
-          msg: 'Server Error'
-      })
+    next(error);
   }
-})
+});
 
 module.exports = router; //user.js 라는 파일이 모듈로써 동작하기 위해서는 이 파일을 밖으로 누구를 export할 수 있음.
