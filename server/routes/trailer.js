@@ -59,7 +59,7 @@ router.get('/trailers', user_jwt, async(req,res,next) => {
 });
 
 //트레일러 선택시 트레일러에 대한 상세 정보 확인 API
-router.get('trailers/:id', user_jwt, async(req, res, next) => {
+router.get('/trailers/:id', user_jwt, async(req, res, next) => {
   try {
     let trailer = await Trailer.findById(req.params.id);
 
