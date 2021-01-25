@@ -7,7 +7,7 @@ const user_jwt = require('../middleware/user_jwt');
 router.post('/trailers', async(req,res,next) => {
   try {
     const trailer = await Trailer.create({
-      userId: req.body.id,
+      userId: req.user.id,
       trailerName: req.body.trailerName,
       license: req.body.license,
       rentalPlace: req.body.rentalPlace,
