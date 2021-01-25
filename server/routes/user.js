@@ -8,7 +8,7 @@ const { token } = require('morgan');
 
 router.get('/users', user_jwt, async(req, res, next) => {
     try {
-        const user = await User.findById(req.user.id).select('-password -username -__v');
+        const user = await User.findById(req.user.id).select('-password -__v');
             res.status(200).json({
                 success: true,
                 user: user
@@ -142,7 +142,7 @@ router.put('/users/:id', user_jwt, async(req, res, next) => {
     user = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true
-    });
+    }).select('-password -__v');
 
     if(!user) {
       res.status(400).json({
