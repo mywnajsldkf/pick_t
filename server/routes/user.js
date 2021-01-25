@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const Trailer = require('../models/Trailer');
 const bcryptjs = require('bcryptjs');
 const user_jwt = require('../middleware/user_jwt');
 const jwt = require('jsonwebtoken');
@@ -161,6 +162,46 @@ router.put('/users/:id', user_jwt, async(req, res, next) => {
       msg: 'Successfully updated'
     });
 
+  } catch(error) {
+    next(error);
+  }
+});
+
+//회원 탈퇴 API
+router.delete('/users/:id', user_jwt, async(req, res, next) => {
+  try {
+    let user = await User.findById(req.params.id);
+
+    if(!user) {
+      res.status(400).json({
+        success: false,
+        msg: 'User not exists'
+      });
+    }
+
+    //해당 유저가 등록한 트레일러 삭제
+    let registeredTrailer = await Trailer.findOne({ userId: req.params.id });
+
+    if(!registeredTrailer) {
+      res.status(200).json({
+        success: true,
+        msg: 'Registered trailer not exists'
+      });
+    }
+
+    registeredTrailer = await Trailer.findOneAndDelete({ userId: req.params.id });
+
+    res.status(200).json({
+      success: true,
+      msg: 'Successfully Deleted Trailer'
+    });
+
+    user = await User.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({
+      success: true,
+      msg: 'Successfully Deleted User'
+    });
   } catch(error) {
     next(error);
   }
