@@ -6,6 +6,7 @@ const user_jwt = require('../middleware/user_jwt');
 const jwt = require('jsonwebtoken');
 const { token } = require('morgan');
 
+//마이페이지 개인정보 호출 API
 router.get('/users', user_jwt, async(req, res, next) => {
     try {
         const user = await User.findById(req.user.id).select('-password -__v');
@@ -22,6 +23,7 @@ router.get('/users', user_jwt, async(req, res, next) => {
     }
 })
 
+//회원가입 API
 router.post('/users',async(req, res, next) => {
     const{ username, email, password, nickname, phone } = req.body;
 
@@ -72,6 +74,7 @@ router.post('/users',async(req, res, next) => {
     }
 });
 
+//로그인 API
 router.post('/login', async(req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -128,6 +131,7 @@ router.post('/login', async(req, res, next) => {
     }
 });
 
+//개인정보 수정 API
 router.put('/users/:id', user_jwt, async(req, res, next) => {
   try {
     let user = await User.findById(req.params.id);

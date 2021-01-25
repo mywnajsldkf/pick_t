@@ -4,7 +4,8 @@ const Trailer = require('../models/Trailer');
 const bcryptjs = require('bcryptjs');
 const user_jwt = require('../middleware/user_jwt');
 
-router.post('/trailers', user_jwt, async(req,res,next) => {
+//트레일러 정보 등록 API
+router.post('/trailers', user_jwt, async(req, res, next) => {
   try {
     const trailer = await Trailer.create({
       userId: req.user.id,
@@ -34,6 +35,7 @@ router.post('/trailers', user_jwt, async(req,res,next) => {
 
 });
 
+//메인화면 모든 트레일러 정보 호출 API
 router.get('/trailers', user_jwt, async(req,res,next) => {
   try {
     const trailers = await Trailer.find();
@@ -49,12 +51,47 @@ router.get('/trailers', user_jwt, async(req,res,next) => {
       success: true,
       totalNumberOfTrailers: trailers.length,
       trailer: trailers,
-      msg: 'Successfully fetch ed'
+      msg: 'Successfully fetched'
     });
   } catch(error) {
     next(error);
   }
 });
+
+//트레일러 선택시 트레일러에 대한 상세 정보 확인 API
+router.get('trailers/:id', user_jwt, async(req, res, next) => {
+  try {
+    let trailer = await Trailer.findById(req.params.id);
+
+    if(!trailer) {
+      res.status(400).json({
+        success: false,
+        msg: 'trailerInfo not exists'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      trailer: trailer,
+      msg: 'Successfully fetched'
+    });
+  } catch(error) {
+    next(error);
+  }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
