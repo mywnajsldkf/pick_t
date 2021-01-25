@@ -12,7 +12,7 @@ router.get('/users', user_jwt, async(req, res, next) => {
             res.status(200).json({
                 success: true,
                 user: user,
-                userInfo: user.id,
+                userInfo: user._id,
                 userInfo2: req.user.id
             });
     } catch(error) {
@@ -53,6 +53,7 @@ router.post('/users',async(req, res, next) => {
         const payload = {
             user: {
                 id: user.id
+                console.log(user.id);
             }
         }
 
