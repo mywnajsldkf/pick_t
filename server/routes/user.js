@@ -11,7 +11,9 @@ router.get('/users', user_jwt, async(req, res, next) => {
         const user = await User.findById(req.user.id).select('-password -_id -username -__v');
             res.status(200).json({
                 success: true,
-                user: user
+                user: user,
+                userInfo: user.id,
+                userInfo2: req.user.id
             });
     } catch(error) {
         console.log(error.message);
