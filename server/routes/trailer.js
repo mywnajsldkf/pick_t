@@ -4,7 +4,7 @@ const Trailer = require('../models/Trailer');
 const bcryptjs = require('bcryptjs');
 const user_jwt = require('../middleware/user_jwt');
 
-router.post('/trailers', async(req,res,next) => {
+router.post('/trailers', user_jwt, async(req,res,next) => {
   try {
     const trailer = await Trailer.create({
       userId: req.user.id,
