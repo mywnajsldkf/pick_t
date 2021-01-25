@@ -151,7 +151,7 @@ router.put('/users/:id', user_jwt, async(req, res, next) => {
       });
     }
 
-    res.status.json({
+    res.status(200).json({
       success: true,
       user: user,
       msg: 'Successfully updated'
