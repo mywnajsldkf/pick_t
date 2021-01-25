@@ -80,6 +80,28 @@ router.get('/trailers/:id', user_jwt, async(req, res, next) => {
   }
 })
 
+//등록한 트레일러 삭제 API
+router.delete('/trailers/:id', user_jwt, async(req, res, next) => {
+  try {
+    let registeredTrailer = await Trailer.findById(req.params.id);
+
+    if(!trailer) {
+      res.status(400).json({
+        success: false,
+        msg: 'Trailer not exists'
+      });
+    }
+
+    registeredTrailer = await Trailer.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({
+      success: true,
+      msg: 'Successfully Deleted Trailer'
+    });
+  } catch(error) {
+    next(error);
+  }
+});
 
 
 
