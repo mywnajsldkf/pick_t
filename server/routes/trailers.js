@@ -13,7 +13,7 @@ router.post('/test', function(req, res) {
 */
 
 // trailer 등록
-router.post('/register', async(req, res, next)=>{
+router.post('/trailers', async(req, res, next)=>{
   try {
     const trailer = await Trailer.create({
       trailerName: req.body.trailerName,
