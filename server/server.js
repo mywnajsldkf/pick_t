@@ -3,7 +3,7 @@ const dotenv = require('dotenv')
 const connectDB = require('./config/db')
 const colors = require('colors')
 const morgan = require('morgan')
-
+const trailerRouter = require('./routes/trailer');
 const app = express();
 
 app.use(morgan('dev'));
@@ -23,7 +23,7 @@ connectDB();
 
 // app.use('/api/todo/auth',require('./routes/user'));
 
-app.use('/api/pickt', require('./routes/trailers'));
+app.use('/api/pickt', trailerRouter);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT,
