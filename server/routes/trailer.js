@@ -40,6 +40,8 @@ router.get('/trailers', user_jwt, async(req,res,next) => {
   try {
     const trailers = await Trailer.find();
 
+    console.log(trailers.length);
+
     if(!trailers) {
       res.status(400).json({
         success: false,
