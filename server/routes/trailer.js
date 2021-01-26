@@ -43,4 +43,28 @@ router.post('/trailers', async(req, res, next)=>{
 
 });
 
+// 메인화면에서 모든 트레일러 정보 호출
+router.get('/trailers', async(req, res, next)=>{
+  try{
+    // 모두 찾음
+    const trailers = await Trailer.find();
+    // 실패
+    if(trailers.length == 0){
+      res.status(400).json({
+        success: false,
+        msg: 'Trailer not exists'
+      });
+    }
+    // 성공
+    res.status(200).json({
+      success: true, 
+      totalNumberOfTrailers: trailers.length, 
+      trailer: trailers,
+      msg: 'Successfully fetched'
+    });
+  }catch(error){
+    next(error);
+  }
+});
+
 module.exports = router;
