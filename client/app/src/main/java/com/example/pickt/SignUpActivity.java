@@ -102,7 +102,7 @@ public class SignUpActivity extends AppCompatActivity {
         params.put("nickname", nickName);
         params.put("phone", phone);
 
-        String apiKey = "http://10.0.2.2:3001/api/todo/auth/register";
+        String apiKey = "http://101.101.209.224:3001/api/pickt/users";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
                 apiKey, new JSONObject(params), new Response.Listener<JSONObject>() {

@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
         params.put("email", email);
         params.put("password", password);
 
-        String apiKey = "http://10.0.2.2:3001/api/todo/auth/login";
+        String apiKey = "http://101.101.209.224:3001/api/pickt/login";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
                 apiKey, new JSONObject(params), new Response.Listener<JSONObject>() {
@@ -136,6 +136,7 @@ public class LoginActivity extends AppCompatActivity {
                 headers.put("Content-Type", "application/json");
                 return params;
             }
+
         };
 
         // set retry policy

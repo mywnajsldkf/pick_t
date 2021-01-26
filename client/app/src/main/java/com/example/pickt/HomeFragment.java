@@ -73,10 +73,12 @@ public class HomeFragment extends Fragment {
                         public void handleMessage(Message m) {
                             if (!mHasDoubleClicked) {
 
+                                /*
                                 Intent intentLoadActivity = new Intent(getActivity(), DetailCarActivity.class);
                                 intentLoadActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intentLoadActivity);
-                                // Toast.makeText(getContext(), "다음 액티비티로 전환됩니다.", Toast.LENGTH_SHORT).show();
+                                 */
+                                Toast.makeText(getContext(), "다음 액티비티로 전환됩니다.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     };
@@ -89,6 +91,7 @@ public class HomeFragment extends Fragment {
         });
 
         // 차량 추가 페이지 이동
+        /*
         addCar = (FloatingActionButton) viewGroup.findViewById(R.id.addCar);
         addCar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,9 +101,7 @@ public class HomeFragment extends Fragment {
                 startActivity(intentLoadActivity);
             }
         });
-
+         */
         return viewGroup;
     }
-
-
 }

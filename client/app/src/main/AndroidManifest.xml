@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".DetailCarActivity"></activity>
+        <activity android:name=".ReservationList"></activity>
+        <activity android:name=".DetailCarActivity" />
         <activity android:name=".AddCarActivity" />
         <activity android:name=".SplashActivity" />
         <activity android:name=".SignUpActivity" />

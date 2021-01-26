@@ -147,7 +147,7 @@
                 android:textSize="15sp"
                 android:textStyle="bold"/>
 
-            <EditText
+            <!--EditText
                 android:id="@+id/editCost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -159,8 +159,9 @@
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:colorAccent="#2cdedede"
-                android:colorControlNormal="#2cdedede">
-            </EditText>
+                android:colorControlNormal="#2cdedede"-->
+            <!--/EditText-->
+
             <!-- 정보 등-->
             <TextView
                 android:layout_width="match_parent"
