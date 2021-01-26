@@ -1,35 +1,47 @@
 const mongoose = require('mongoose');
 
 const trailerSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
+    /*
+    userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  */
 
-    license:{
-        type: String,
-        required: true
-    },
+  reportingDate: {
+    type: Date,
+    default: Date.now
+  },
 
-    rent: {
-        type: String,
-        required: true
-    },
+  trailerName: {
+    type: String,
+    required: true
+  },
 
-    cost: {
-      type: String,
-      required: true
-    },
+  license: {
+    type: String,
+    required: true
+  },
 
-    num: {
-      type: String,
-      required: true
-    },
+  rentalPlace: {
+    type: String,
+    required: true
+  },
 
-    facility:{
-        type: String,
-        required: true
-    }
+  capacity: {
+    type: String,
+    required: true
+  },
+
+  facilities: {
+    type: String,
+    required: true
+  },
+
+  description: {
+    type: String,
+    required: true
+  }
 });
 
 module.exports = mongoose.model('Trailer', trailerSchema);
