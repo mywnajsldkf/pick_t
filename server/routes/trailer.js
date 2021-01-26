@@ -63,7 +63,7 @@ router.get('/trailers/:id', user_jwt, async(req, res, next) => {
   try {
     let trailer = await Trailer.findById(req.params.id);
 
-    if(!trailer) {
+    if(trailer.length == 0) {
       res.status(400).json({
         success: false,
         msg: 'trailerInfo not exists'
