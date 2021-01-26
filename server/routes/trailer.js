@@ -40,12 +40,10 @@ router.get('/trailers', user_jwt, async(req,res,next) => {
   try {
     const trailers = await Trailer.find();
 
-    console.log(trailers.length);
-
-    if(!trailers) {
+    if(trailers.length == 0) {
       res.status(400).json({
         success: false,
-        msg: 'Something went wrong'
+        msg: 'Trailer not exists'
       });
     }
 
