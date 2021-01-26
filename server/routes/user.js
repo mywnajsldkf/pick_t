@@ -190,12 +190,6 @@ router.delete('/users/:id', user_jwt, async(req, res, next) => {
     }
 
     registeredTrailer = await Trailer.findOneAndDelete({ userId: req.params.id });
-
-    res.status(200).json({
-      success: true,
-      msg: 'Successfully Deleted Trailer'
-    });
-
     user = await User.findByIdAndDelete(req.params.id);
 
     res.status(200).json({
