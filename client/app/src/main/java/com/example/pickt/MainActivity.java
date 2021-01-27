@@ -57,17 +57,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        SharedPreferences pickt_pref = getSharedPreferences("user_pickt", MODE_PRIVATE);
-        if(pickt_pref.contains("token")) {
-            //startActivity(new Intent(MainActivity.this, AddTrailerActivity.class));
-            finish();
-        }
-    }
-
-
 }

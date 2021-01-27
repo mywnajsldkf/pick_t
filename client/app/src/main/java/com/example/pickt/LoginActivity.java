@@ -69,7 +69,6 @@ public class LoginActivity extends AppCompatActivity {
                 if(validate(v)) {
                     loginUser(v);
                 }
-                //gotoMainActivity(); //로그인 성공 시 메인 화면 전환, 실패 시 로그인 실패 메세
             }
         });
 
@@ -177,14 +176,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
         }
-    }
-
-    private void gotoMainActivity() {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-                Intent.FLAG_ACTIVITY_CLEAR_TASK |
-                Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
     }
 
     private void gotoSignInActivity() {

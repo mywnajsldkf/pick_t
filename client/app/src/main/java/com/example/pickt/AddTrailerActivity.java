@@ -1,5 +1,6 @@
 package com.example.pickt;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -109,8 +110,8 @@ public class AddTrailerActivity extends AppCompatActivity {
                     if (response.getBoolean("success")) {
                         String msg = "차량 등록이 완료되었습니다.";
                         Toast.makeText(AddTrailerActivity.this, msg, Toast.LENGTH_SHORT).show();
-                        // MainActivity로 넘어가는 것
-                        startActivity(new Intent(AddTrailerActivity.this, MainActivity.class));
+                        // MainActivity로 넘어가는 것, 기존에 있던 스택 삭제
+                        startActivity(new Intent(AddTrailerActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
