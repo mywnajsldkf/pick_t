@@ -179,6 +179,8 @@ router.put('/users/:id/likeLists', user_jwt, async(req, res, next) => {
       });
     }
 
+    log.console(req.body);
+    
     user = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true
@@ -196,7 +198,7 @@ router.put('/users/:id/likeLists', user_jwt, async(req, res, next) => {
       user: user,
       msg: 'Successfully likeList registered'
     });
-    
+
   } catch(error) {
     next(error);
   }
