@@ -6,9 +6,19 @@ const likeListSchema = new mongoose.Schema({
     required: true
   },
 
+  trailerName: {
+    type: String,
+    required: true
+  },
+
+  rentalPlace: {
+    type: String,
+    required: true
+  },
+
   like: {
     type: Boolean,
-    default: false
+    default: true
   },
 
   publishedDate: {
