@@ -215,8 +215,6 @@ router.delete('/users/:id/likeLists', user_jwt, async(req, res, next) => {
 
     let likedTrailer = await User.findByIdAndUpdate(req.params.id, { $pull: { likeLists: { trailerId: req.body.trailerId } } });
 
-    likedTrailer = await User.findById(req.params.id).select('likeLists');
-
     if(!likedTrailer) {
       res.status(400).json({
         success: false,
