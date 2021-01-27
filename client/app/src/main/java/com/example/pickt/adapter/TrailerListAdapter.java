@@ -1,25 +1,20 @@
 package com.example.pickt.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pickt.HomeFragment;
-import com.example.pickt.MyCarData;
 import com.example.pickt.R;
-import com.example.pickt.interfaces.RecyclerViewClickListener;
 import com.example.pickt.model.TrailerModel;
 
 import java.util.ArrayList;
@@ -27,10 +22,12 @@ import java.util.ArrayList;
 public class TrailerListAdapter extends RecyclerView.Adapter<TrailerListAdapter.TrailerViewHolder>{
     ArrayList<TrailerModel> arrayList;
     Context context;
+    Fragment fragment;
 
-    public TrailerListAdapter(Context context, ArrayList<TrailerModel> arrayList) {
+    public TrailerListAdapter(Context context, ArrayList<TrailerModel> arrayList, HomeFragment fragment) {
         this.arrayList = arrayList;
         this.context = context;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -40,7 +37,6 @@ public class TrailerListAdapter extends RecyclerView.Adapter<TrailerListAdapter.
 
         final TrailerViewHolder trailerViewHolder = new TrailerViewHolder(view);
 
-        /*
         trailerViewHolder.trailer_card.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -48,7 +44,6 @@ public class TrailerListAdapter extends RecyclerView.Adapter<TrailerListAdapter.
             }
         });
 
-         */
         return trailerViewHolder;
     }
 

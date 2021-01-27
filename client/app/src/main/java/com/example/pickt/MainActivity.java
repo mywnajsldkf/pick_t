@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences pickt_pref = getSharedPreferences("user_pickt", MODE_PRIVATE);
         if(pickt_pref.contains("token")) {
-            startActivity(new Intent(MainActivity.this, AddTrailerActivity.class));
+            //startActivity(new Intent(MainActivity.this, AddTrailerActivity.class));
             finish();
         }
     }

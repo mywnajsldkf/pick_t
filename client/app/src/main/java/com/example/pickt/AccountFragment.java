@@ -55,7 +55,7 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intentLoadActivity = new Intent(getActivity(), AddTrailerActivity.class);
-                intentLoadActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //intentLoadActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intentLoadActivity);
             }
         });
@@ -64,7 +64,7 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intentLoadActivity = new Intent(getActivity(),FavoriteActivity.class);
-                intentLoadActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //intentLoadActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intentLoadActivity);
             }
         });
