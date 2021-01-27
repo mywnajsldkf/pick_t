@@ -213,7 +213,7 @@ router.put('/users/:id/likeLists', user_jwt, async(req, res, next) => {
       });
     }
 
-    let likedTrailer = await User.findByIdAndUpdate(req.params.id, { $pull: { likeLists: { $elemMatch: { trailerId: req.body.trailerId } } } });
+    let likedTrailer = await User.findByIdAndDelete(req.params.id, { $pull: { likeLists: { $elemMatch: { trailerId: req.body.trailerId } } } });
     likedTrailer = await User.findById(req.params.id).select('likeLists');
 
     if(!likedTrailer) {
