@@ -213,7 +213,7 @@ router.get('/users/:id/likeLists', user_jwt, async(req, res, next) => {
       });
     }
 
-    let likedTrailer = await User.findById(req.params.id).select('user.likeLists');
+    let likedTrailer = await User.findById(req.params.id);
 
     if(!likedTrailer) {
       res.status(400).json({
