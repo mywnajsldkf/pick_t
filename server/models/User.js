@@ -27,6 +27,33 @@ const likeListSchema = new mongoose.Schema({
   }
 });
 
+const reservationListSchema = new mongoose.Schema({
+  guestId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+
+  hostId: {
+    type: String,
+    required: true
+  },
+
+  trailerId: {
+    type: String,
+    required: true
+  },
+
+  trailerName: {
+    type: String,
+    required: true
+  },
+
+  rentalPlace: {
+    type: String,
+    required: true
+  }
+});
+
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -53,7 +80,9 @@ const userSchema = new mongoose.Schema({
       required: true
     },
 
-    likeLists: [likeListSchema]
+    likeLists: [likeListSchema],
+
+    reservationLists: [reservationListSchema]
 });
 
 module.exports = mongoose.model('User', userSchema);

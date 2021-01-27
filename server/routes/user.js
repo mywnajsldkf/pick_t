@@ -262,6 +262,40 @@ router.delete('/users/:id/likeLists', user_jwt, async(req, res, next) => {
   }
 });
 
+//예약하기 API
+router.put('/users/:id/reservationLists', user_jwt, async(req, res, next) => {
+  try {
+    let user = await User.findById(req.params.id);
+
+    if(!user) {
+      res.status(400).json({
+        success: false,
+        msg: 'User not exists'
+      });
+    }
+
+    user = await User.findByIdAndUpdate(req.params.id, { $push: { reservationLists: req.body } }, {
+      new: true,
+    });
+
+    if(!user) {
+      res.status(400).json({
+        success: false,
+        msg: 'Something went wrong.'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      user: user,
+      msg: 'Successfully registered'
+    });
+
+  } catch(error) {
+    next(error);
+  }
+});
+
 //회원 탈퇴 API
 router.delete('/users/:id', user_jwt, async(req, res, next) => {
   try {
