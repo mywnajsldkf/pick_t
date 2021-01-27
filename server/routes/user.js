@@ -7,23 +7,6 @@ const user_jwt = require('../middleware/user_jwt');
 const jwt = require('jsonwebtoken');
 const { token } = require('morgan');
 
-//마이페이지 개인정보 호출 API
-router.get('/users', user_jwt, async(req, res, next) => {
-    try {
-        const user = await User.findById(req.user.id).select('-password -__v');
-            res.status(200).json({
-                success: true,
-                user: user
-            });
-    } catch(error) {
-        console.log(error.message);
-        res.status(500).json({
-            success: false,
-            msg: 'Server Error'
-        })
-    }
-})
-
 //회원가입 API
 router.post('/users',async(req, res, next) => {
     const{ username, email, password, nickname, phone } = req.body;
@@ -132,6 +115,23 @@ router.post('/login', async(req, res, next) => {
     }
 });
 
+//마이페이지 개인정보 호출 API
+router.get('/users', user_jwt, async(req, res, next) => {
+    try {
+        const user = await User.findById(req.user.id).select('-password -__v');
+            res.status(200).json({
+                success: true,
+                user: user
+            });
+    } catch(error) {
+        console.log(error.message);
+        res.status(500).json({
+            success: false,
+            msg: 'Server Error'
+        })
+    }
+})
+
 //개인정보 수정 API
 router.put('/users/:id', user_jwt, async(req, res, next) => {
   try {
@@ -162,6 +162,41 @@ router.put('/users/:id', user_jwt, async(req, res, next) => {
       msg: 'Successfully updated'
     });
 
+  } catch(error) {
+    next(error);
+  }
+});
+
+//관심 목록 등록 API
+router.put('/users/:id/likeLists', user_jwt, async(req, res, next) => {
+  try {
+    let user = await User.findById(req.params.id);
+
+    if(!user) {
+      res.status(400).json({
+        success: false,
+        msg: 'User not exists'
+      });
+    }
+
+    user = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true
+    }).select('-password -__v');
+
+    if(!user) {
+      res.status(400).json({
+        success: false,
+        msg: 'Something went wrong.'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      user: user,
+      msg: 'Successfully likeList registered'
+    });
+    
   } catch(error) {
     next(error);
   }

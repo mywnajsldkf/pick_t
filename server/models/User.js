@@ -24,6 +24,11 @@ const userSchema = new mongoose.Schema({
     phone: {
       type: String,
       required: true
+    },
+
+    likeList: {
+      type: String,
+      required: true
     }
 });
 
