@@ -213,7 +213,7 @@ router.delete('/users/:id/likeLists', user_jwt, async(req, res, next) => {
       });
     }
 
-    let likedTrailer = await User.findByIdAndUpdate(req.params.id, $pull: { likeLists: { trailerId: req.body.trailerId } });
+    let likedTrailer = await User.findByIdAndUpdate(req.params.id, { $pull: { likeLists: { trailerId: req.body.trailerId } } });
 
     console.log(likedTrailer);
 
