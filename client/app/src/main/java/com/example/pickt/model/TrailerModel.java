@@ -1,16 +1,17 @@
 package com.example.pickt.model;
 
 public class TrailerModel {
-    private String id, trailerName, license, rentalPlace, capacity, facilities, description;
+    private String id, trailerName, rentalPlace;
+            //license, rentalPlace, capacity, facilities, description;
 
-    public TrailerModel(String jsonObjectString, String name, String string, String rentalPlace, String id, String trailerName, String license){
+    public TrailerModel(String id, String trailerName, String rentalPlace){
         this.id = id;
         this.trailerName = trailerName;
-        this.license = license;
-        this.rentalPlace = this.rentalPlace;
-        this.capacity = capacity;
-        this.facilities = facilities;
-        this.description = description;
+        //this.license = license;
+        this.rentalPlace = rentalPlace;
+        //this.capacity = capacity;
+        //this.facilities = facilities;
+        //this.description = description;
     }
 
     public String getId(){
@@ -21,14 +22,17 @@ public class TrailerModel {
         return trailerName;
     }
 
+    /*
     public String getLicense(){
         return license;
     }
+     */
 
     public String getRentalPlace(){
         return rentalPlace;
     }
 
+    /*
     public String getCapacity(){
         return capacity;
     }
@@ -40,4 +44,5 @@ public class TrailerModel {
     public String getDescription(){
         return description;
     }
+     */
 }

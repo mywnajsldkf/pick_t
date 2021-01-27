@@ -152,28 +152,23 @@ public class HomeFragment extends Fragment {
                     if (response.getBoolean("success")) {
                         JSONArray jsonArray = response.getJSONArray("trailer");
 
-                        if (jsonArray.length() == 0) {
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                        } else {
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            TrailerModel trailerModel = new TrailerModel(
+                                    jsonObject.getString("_id"),
+                                    jsonObject.getString("trailerName"),
+                                    //jsonObject.getString("license"),
+                                    jsonObject.getString("rentalPlace")
+                                    //jsonObject.getString("capacity"),
+                                    //jsonObject.getString("facilities"),
+                                    //jsonObject.getString("description")
+                            );
 
-//                                private String trailerName, license, rentalPlace, capacity, facilities, description;
-
-                                TrailerModel trailerModel = new TrailerModel(
-                                        jsonObject.getString("_id"),
-                                        jsonObject.getString("trailerName"),
-                                        jsonObject.getString("license"),
-                                        jsonObject.getString("rentalPlace"),
-                                        jsonObject.getString("capacity"),
-                                        jsonObject.getString("facilities"),
-                                        jsonObject.getString("description")
-                                );
-                                arrayList.add(trailerModel);
-                            }
-                            trailerListAdapter = new TrailerListAdapter(getActivity(), arrayList, HomeFragment.this);
-                            recyclerView.setAdapter(trailerListAdapter);
+                            arrayList.add(trailerModel);
                         }
+                        trailerListAdapter = new TrailerListAdapter(getActivity(), arrayList);
+                        recyclerView.setAdapter(trailerListAdapter);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -15,10 +15,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.pickt.UtilsService.SharedPreferenceClass;
 
+import org.w3c.dom.Text;
+
 public class AccountFragment extends Fragment {
     MainActivity mainActivity;
     private TextView registerBtn;
     private TextView logoutBtn;
+    private TextView favoriteBtn;
 
     SharedPreferenceClass sharedPreferenceClass;
 
@@ -44,6 +47,7 @@ public class AccountFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
 
         registerBtn = (TextView) view.findViewById(R.id.registerCar);
+        favoriteBtn = (TextView) view.findViewById(R.id.favoriteList);
         logoutBtn = (TextView) view.findViewById(R.id.logoutBtn);
         sharedPreferenceClass = new SharedPreferenceClass(mainActivity);
 
@@ -51,6 +55,15 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intentLoadActivity = new Intent(getActivity(), AddTrailerActivity.class);
+                intentLoadActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intentLoadActivity);
+            }
+        });
+
+        favoriteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentLoadActivity = new Intent(getActivity(),FavoriteActivity.class);
                 intentLoadActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intentLoadActivity);
             }

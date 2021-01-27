@@ -17,6 +17,7 @@
         android:layout_gravity="center_horizontal">
 
         <LinearLayout
+            android:id="@+id/trailerBody"
             android:orientation="vertical"
             android:layout_width="340dp"
             android:layout_height="300dp"
@@ -34,6 +35,7 @@
             </ImageView-->
             
             <LinearLayout
+                android:id="@+id/trailerContent"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
