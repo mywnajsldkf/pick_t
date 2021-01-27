@@ -201,6 +201,37 @@ router.put('/users/:id/likeLists', user_jwt, async(req, res, next) => {
   }
 });
 
+//관심 목록 등록 해제 API
+router.put('/users/:id/likeLists', user_jwt, async(req, res, next) => {
+  try {
+    let user = await User.findById(req.params.id);
+
+    if(!user) {
+      res.status(400).json({
+        success: false,
+        msg: 'User not exists'
+      });
+    }
+
+    let likedTrailer = await User.findByIdAndDelete(req.params.id, likeLists: { $elemMatch: { trailerId: req.body.trailerId } });
+    likedTrailer = await User.findById(req.params.id).select('likeLists');
+
+    if(!likedTrailer) {
+      res.status(400).json({
+        success: false,
+        msg: 'LikedTrailer went wrong'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      likedLists: likedTrailer
+    });
+  } catch(error) {
+    next(error);
+  }
+});
+
 //회원 탈퇴 API
 router.delete('/users/:id', user_jwt, async(req, res, next) => {
   try {
