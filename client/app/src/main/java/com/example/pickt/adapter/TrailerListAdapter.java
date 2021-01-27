@@ -55,12 +55,12 @@ public class TrailerListAdapter extends RecyclerView.Adapter<TrailerListAdapter.
     @Override
     public void onBindViewHolder(@NonNull TrailerListAdapter.TrailerViewHolder holder, int position){
         final String trailerName = arrayList.get(position).getTrailerName();
-        //final String license = arrayList.get(position).getLicense();
+        final String license = arrayList.get(position).getLicense();
         final String rentalPlace = arrayList.get(position).getRentalPlace();
-        //final String capacity = arrayList.get(position).getCapacity();
-        //final String facilities = arrayList.get(position).getFacilities();
-        //final String description = arrayList.get(position).getDescription();
-        //final String id = arrayList.get(position).getId();
+        final String capacity = arrayList.get(position).getCapacity();
+        final String facilities = arrayList.get(position).getFacilities();
+        final String description = arrayList.get(position).getDescription();
+        final String id = arrayList.get(position).getId();
 
         // 보여주는 코드 작성
         holder.textViewName.setText(trailerName);
