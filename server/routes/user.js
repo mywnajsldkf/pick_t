@@ -202,7 +202,7 @@ router.put('/users/:id/likeLists', user_jwt, async(req, res, next) => {
 });
 
 //관심 목록 등록 해제 API
-router.put('/users/:id/likeLists', user_jwt, async(req, res, next) => {
+router.delete('/users/:id/likeLists', user_jwt, async(req, res, next) => {
   try {
     let user = await User.findById(req.params.id);
 
@@ -213,8 +213,9 @@ router.put('/users/:id/likeLists', user_jwt, async(req, res, next) => {
       });
     }
 
-    let likedTrailer = await User.findByIdAndDelete(req.params.id, { $pull: { likeLists: { $elemMatch: { trailerId: req.body.trailerId } } } });
-    likedTrailer = await User.findById(req.params.id).select('likeLists');
+    let likedTrailer = await User.findByIdAndUpdate(req.params.id, $pull: { likeLists: { trailerId: req.body.trailerId } });
+
+    console.log(likedTrailer);
 
     if(!likedTrailer) {
       res.status(400).json({
