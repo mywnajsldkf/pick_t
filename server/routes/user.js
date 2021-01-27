@@ -296,6 +296,38 @@ router.put('/users/:id/reservationLists', user_jwt, async(req, res, next) => {
   }
 });
 
+//예약 목록 가져오기 API
+router.get('/users/:id/reservationLists', user_jwt, async(req, res, next) => {
+  try {
+    let user = await User.findById(req.params.id);
+
+    if(!user) {
+      res.status(400).json({
+        success: false,
+        msg: 'User not exists'
+      });
+    }
+
+    let reservedTrailer = await User.findById(req.params.id).select('-_id -username -email -password -nickname -phone -__v -likeLists');
+
+    if(!reservedTrailer) {
+      res.status(400).json({
+        success: false,
+        msg: 'ReservedTrailer not exists.'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      trailer: reservedTrailer,
+      msg: 'Successfully retrieved'
+    });
+
+  } catch(error) {
+    next(error);
+  }
+});
+
 //회원 탈퇴 API
 router.delete('/users/:id', user_jwt, async(req, res, next) => {
   try {
