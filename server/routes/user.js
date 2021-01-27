@@ -179,8 +179,8 @@ router.put('/users/:id/likeLists', user_jwt, async(req, res, next) => {
       });
     }
 
-    log.console(req.body);
-    
+    console.log(req.body);
+
     user = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true
