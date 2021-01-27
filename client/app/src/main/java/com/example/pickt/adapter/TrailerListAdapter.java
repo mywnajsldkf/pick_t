@@ -25,25 +25,6 @@ public class TrailerListAdapter extends RecyclerView.Adapter<TrailerListAdapter.
     Context context;
     final private RecyclerViewClickListener clickListener;
 
-    /*
-    // 어댑터 내에서 리스터 인터페이스 정의
-    public interface OnItemClickListener{
-        boolean onItemClick(View v, int position);
-    }
-     */
-
-    /*
-    // 리스너 객체 전달 메서드와 변수 추가
-    private OnItemClickListener mListener = null;
-     */
-
-    // OnItemClickListener 리스너 객체 참조를 어댑터에 전달하는 메소드
-    /*
-    public void setOnItemClickListener(OnItemClickListener listener){
-        this.mListener = listener;
-    }
-     */
-
     private long cardPressTime = 0;
     private Toast toast;
 
@@ -59,15 +40,6 @@ public class TrailerListAdapter extends RecyclerView.Adapter<TrailerListAdapter.
         View view = LayoutInflater.from(context).inflate(R.layout.trailer_item_list, parent, false);
 
         final TrailerViewHolder trailerViewHolder = new TrailerViewHolder(view);
-
-        /*
-        trailerViewHolder.trailer_card.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-
-            }
-        });
-         */
 
         return trailerViewHolder;
     }
@@ -85,14 +57,6 @@ public class TrailerListAdapter extends RecyclerView.Adapter<TrailerListAdapter.
         // 보여주는 코드 작성
         holder.textViewName.setText(trailerName);
         holder.textViewRent.setText(rentalPlace);
-
-        /*
-        holder.trailer_card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-         */
     }
 
     @Override

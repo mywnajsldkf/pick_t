@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TrailerInfoAcitivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+        <LinearLayout
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <!--사진 등록-->
+            <ImageView
+                android:id="@+id/addImageView"
+                android:layout_width="268dp"
+                android:layout_height="138dp"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif"
+                android:textColor="#60000000"
+                android:background="#f0f0f0">
+            </ImageView>
+
+            <TextView
+                android:id="@+id/RegisterText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif"
+                android:text="제이코 카라반 18피트"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/rentalPlaceText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="광주 전남대점"
+                android:colorAccent="#2cdedede"
+                android:colorControlNormal="#2cdedede">
+            </TextView>
+
+            <TextView
+                android:id="@+id/licenseText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="sans-serif"
+                android:text="1종 면허"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!--차량 정보 등-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="sans-serif"
+                android:text="차량 상세 정보"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#454545"/>
+
+            <!--수용 인원-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif"
+                android:text="수용 인원"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/capacityText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif"
+                android:textSize="14sp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="3"
+                android:colorAccent="#2cdedede"
+                android:colorControlNormal="#2cdedede">
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif"
+                android:text="편의 시설"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/facilityText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif"
+                android:textSize="14sp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="침실, 식사공간, 화장실 2개"
+                android:colorAccent="#2cdedede"
+                android:colorControlNormal="#2cdedede">
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif"
+                android:text="차량 상세 설명"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/descriptionText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif"
+                android:textSize="14sp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:inputType="textMultiLine"
+                android:text="미국 최고 인기 트레일러이며, 국내에서도 인지도 높은 실속형 캠핑트레일러의 대명사입니다.  태양광시스템을 제외한 풀옵션 사양이며, 확장형으로
+실용적인 공간활용 또한 가능합니다."
+                android:colorAccent="#2cdedede"
+                android:colorControlNormal="#2cdedede">
+            </TextView>
+
+            <!--TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="sans-serif"
+                android:text="1일 대여료"
+                android:textSize="15sp"
+                android:textStyle="bold"/-->
+
+            <!--EditText
+                android:id="@+id/editCost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif"
+                android:hint="ex)74,820원~"
+                android:textColorHint="#707070"
+                android:maxLength="30"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:colorAccent="#2cdedede"
+                android:colorControlNormal="#2cdedede"-->
+            <!--/EditText-->
+
+            <Button
+                android:id="@+id/reserveBtn"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="100dp"
+                android:layout_width="115dp"
+                android:layout_height="41dp"
+                android:layout_gravity="center"
+                android:textColor="#ffffff"
+                android:background="@drawable/btn_shape"
+                android:text="예약하기"
+                android:fontFamily="sans-serif"/>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,9 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".FavoriteActivity"></activity>
+        <activity android:name=".TrailerInfoAcitivity"></activity>
+        <activity android:name=".FavoriteActivity" />
         <activity android:name=".ReservationList" />
-        <activity android:name=".DetailCarActivity" />
         <activity android:name=".AddTrailerActivity" />
         <activity android:name=".SplashActivity" />
         <activity android:name=".SignUpActivity" />
@@ -26,6 +26,7 @@
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
