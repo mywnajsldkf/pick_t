@@ -201,37 +201,37 @@ router.put('/users/:id/likeLists', user_jwt, async(req, res, next) => {
   }
 });
 
-// //관심 목록 가져오기 API
-// router.get('/users/:id/likeLists', user_jwt, async(req, res, next) => {
-//   try {
-//     let user = await User.findById(req.params.id);
-//
-//     if(!user) {
-//       res.status(400).json({
-//         success: false,
-//         msg: 'User not exists'
-//       });
-//     }
-//
-//     let likedTrailer = await User.findById(req.params.id).select('user.likeLists');
-//
-//     if(!likedTrailer) {
-//       res.status(400).json({
-//         success: false,
-//         msg: 'likedTrailer not exists.'
-//       });
-//     }
-//
-//     res.status(200).json({
-//       success: true,
-//       trailer: likedTrailer,
-//       msg: 'Successfully likeList registered'
-//     });
-//
-//   } catch(error) {
-//     next(error);
-//   }
-// });
+//관심 목록 가져오기 API
+router.get('/users/:id/likeLists', user_jwt, async(req, res, next) => {
+  try {
+    let user = await User.findById(req.params.id);
+
+    if(!user) {
+      res.status(400).json({
+        success: false,
+        msg: 'User not exists'
+      });
+    }
+
+    let likedTrailer = await User.findById(req.params.id).select('user.likeLists');
+
+    if(!likedTrailer) {
+      res.status(400).json({
+        success: false,
+        msg: 'likedTrailer not exists.'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      trailer: likedTrailer,
+      msg: 'Successfully likeList registered'
+    });
+
+  } catch(error) {
+    next(error);
+  }
+});
 
 //관심 목록 등록 해제 API
 router.delete('/users/:id/likeLists', user_jwt, async(req, res, next) => {
@@ -253,8 +253,6 @@ router.delete('/users/:id/likeLists', user_jwt, async(req, res, next) => {
         msg: 'LikedTrailer went wrong'
       });
     }
-
-    console.log(likedTrailer);
 
     res.status(200).json({
       success: true
