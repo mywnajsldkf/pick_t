@@ -254,11 +254,10 @@ router.delete('/users/:id/likeLists', user_jwt, async(req, res, next) => {
       });
     }
 
-    likedTrailer = await User.findById(req.params.id);
+    console.log(likedTrailer);
 
     res.status(200).json({
-      success: true,
-      likedLists: likedTrailer
+      success: true
     });
   } catch(error) {
     next(error);
