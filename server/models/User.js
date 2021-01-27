@@ -1,5 +1,22 @@
 const mongoose = require('mongoose');
 
+const likeListSchema = new mongoose.Schema({
+  trailerId: {
+    type: String,
+    required: true
+  },
+
+  like: {
+    type: Boolean,
+    default: false
+  },
+
+  publishedDate: {
+    type: Date,
+    default: Date.now
+  }
+});
+
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -26,10 +43,7 @@ const userSchema = new mongoose.Schema({
       required: true
     },
 
-    likeList: {
-      type: String,
-      required: true
-    }
+    likeLists: [likeListSchema]
 });
 
 module.exports = mongoose.model('User', userSchema);

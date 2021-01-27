@@ -6,7 +6,7 @@ const trailerSchema = new mongoose.Schema({
     ref: 'User'
   },
 
-  reportingDate: {
+  publishedDate: {
     type: Date,
     default: Date.now
   },

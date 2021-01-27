@@ -179,12 +179,10 @@ router.put('/users/:id/likeLists', user_jwt, async(req, res, next) => {
       });
     }
 
-    console.log(req.body);
-
-    user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    user = await User.findByIdAndUpdate(req.params.id, { $push: req.body }, {
       new: true,
       runValidators: true
-    }).select('-password -__v');
+    });
 
     if(!user) {
       res.status(400).json({
