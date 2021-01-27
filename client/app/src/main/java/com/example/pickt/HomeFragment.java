@@ -73,8 +73,6 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setHasFixedSize(true);
 
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         getTrailers();
         return view;
 
@@ -88,6 +86,20 @@ public class HomeFragment extends Fragment {
          */
 
         // 프래그먼트에서 커스텀 리스너 객체 생성 및 전달
+//        trailerListAdapter.setOnItemClickListener(new TrailerListAdapter.OnItemClickListener() {
+//            @Override
+//            public boolean onItemClick(View v, int position) {
+//                long pressTime = System.currentTimeMillis();
+                // 더블 탭 -> 관 차량 이동
+//                if (pressTime - lastPressTime <= DOUBLE_PRESS_INTERVAL){
+//                    Toast.makeText(getContext(), "관심 차량으로 등록되었습니다", Toast.LENGTH_SHORT).show();
+//                    mHasDoubleClicked = true;
+//                }
+                // 한번 탭 -> detail 액티비트 전환 (우선 toast message)
+//                else {
+//                return false;
+//            }
+//        });
         //TrailerListAdapter myCarAdapter = new TrailerListAdapter(myCarData, HomeFragment.this);
         //recyclerView.setAdapter(myCarAdapter);
 
@@ -158,11 +170,11 @@ public class HomeFragment extends Fragment {
                             TrailerModel trailerModel = new TrailerModel(
                                     jsonObject.getString("_id"),
                                     jsonObject.getString("trailerName"),
-                                    //jsonObject.getString("license"),
-                                    jsonObject.getString("rentalPlace")
-                                    //jsonObject.getString("capacity"),
-                                    //jsonObject.getString("facilities"),
-                                    //jsonObject.getString("description")
+                                    jsonObject.getString("license"),
+                                    jsonObject.getString("rentalPlace"),
+                                    jsonObject.getString("capacity"),
+                                    jsonObject.getString("facilities"),
+                                    jsonObject.getString("description")
                             );
 
                             arrayList.add(trailerModel);

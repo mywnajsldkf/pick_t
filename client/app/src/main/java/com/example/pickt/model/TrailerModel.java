@@ -3,7 +3,7 @@ package com.example.pickt.model;
 public class TrailerModel {
     private String id, trailerName, rentalPlace, license, capacity, facilities, description;
 
-    public TrailerModel(String id, String trailerName, String rentalPlace){
+    public TrailerModel(String id, String trailerName, String license, String rentalPlace, String capacity, String facilities, String description){
         this.id = id;
         this.trailerName = trailerName;
         this.license = license;
