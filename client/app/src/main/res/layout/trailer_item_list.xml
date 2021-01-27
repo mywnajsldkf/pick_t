@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/carCard"
+        android:id="@+id/trailerCard"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         app:cardElevation="5dp"
@@ -22,7 +22,7 @@
             android:layout_height="300dp"
             android:layout_gravity="center_horizontal">
 
-            <ImageView
+            <!--ImageView
                 android:id="@+id/carImage"
                 android:src="@drawable/trailer1"
                 android:layout_width="302dp"
@@ -31,7 +31,7 @@
                 android:layout_marginTop="19dp"
                 android:layout_marginLeft="37.5dp"
                 android:layout_marginRight="37.5dp">
-            </ImageView>
+            </ImageView-->
             
             <LinearLayout
                 android:layout_weight="1"
@@ -40,7 +40,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/carNameText"
+                    android:id="@+id/editTrailerName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="37.5dp"
@@ -53,7 +53,7 @@
                     android:text="제이코 카라반 18피트" />
 
                 <TextView
-                    android:id="@+id/carRentText"
+                    android:id="@+id/editRentalPlace"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="37.5dp"
@@ -63,9 +63,9 @@
                     android:textColor="#585858"
                     android:letterSpacing="0.01"
                     android:lineSpacingExtra="8sp"
-                    android:text="광주 전남대"></TextView>점
+                    android:text="광주 전남대"></TextView>
                 
-                <TextView
+                <!--TextView
                     android:id="@+id/carCostText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
                     android:textColor="#355830"
                     android:letterSpacing="0.01"
                     android:lineSpacingExtra="4sp"
-                    android:text="74,820원~"></TextView>
+                    android:text="74,820원~"></TextView-->
             </LinearLayout>
 
         </LinearLayout>

@@ -99,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     if(response.getBoolean("success")) {
                         String token = response.getString("token");
+                        // 로그인하면서 SetValue_string을 통해 token을 저장함
                         sharedPreferenceClass.setValue_string("token", token);
                         String msg = "로그인 성공";
                         Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_LONG).show();

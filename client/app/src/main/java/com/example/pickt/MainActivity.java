@@ -1,15 +1,20 @@
 package com.example.pickt;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.pickt.UtilsService.SharedPreferenceClass;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
+    SharedPreferenceClass sharedPreferenceClass;
     BottomNavigationView bottomNavigationView;
+
     // fragment class.java를 가져오는군
     AccountFragment account;
     ChatFragment chat;
@@ -19,11 +24,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        */
         setContentView(R.layout.activity_main);
+        sharedPreferenceClass = new SharedPreferenceClass(this);
+
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         account = new AccountFragment();
@@ -53,6 +56,17 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        SharedPreferences pickt_pref = getSharedPreferences("user_pickt", MODE_PRIVATE);
+        if(pickt_pref.contains("token")) {
+            startActivity(new Intent(MainActivity.this, AddTrailerActivity.class));
+            finish();
+        }
     }
 
 

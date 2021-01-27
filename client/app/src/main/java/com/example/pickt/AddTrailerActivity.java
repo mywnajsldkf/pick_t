@@ -1,34 +1,19 @@
 package com.example.pickt;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.os.Bundle;
-import android.text.InputFilter;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -37,27 +22,24 @@ import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
+import com.example.pickt.UtilsService.SharedPreferenceClass;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class AddCarActivity extends AppCompatActivity {
+public class AddTrailerActivity extends AppCompatActivity {
     private final int GET_GALLERY_IMAGE = 200;
+
+    // 토큰이 key, value 로 저장되어 있는 shardPreference
+    SharedPreferenceClass sharedPreferenceClass;
+    String token;
 
     private ImageView imageButton;
     private Button registerButton;
@@ -71,12 +53,14 @@ public class AddCarActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
 
-    private String name, license, rentalPlace, capacity, facilities, description;
+    private String trailerName, license, rentalPlace, capacity, facilities, description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_car);
+        setContentView(R.layout.activity_add_trailer);
+
+        sharedPreferenceClass = new SharedPreferenceClass(this);
 
         nameEditText = (EditText) findViewById(R.id.editName);
         licenseEditText = (EditText) findViewById(R.id.editLicense);
@@ -91,7 +75,8 @@ public class AddCarActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                name = nameEditText.getText().toString();
+
+                trailerName = nameEditText.getText().toString();
                 license = licenseEditText.getText().toString();
                 rentalPlace = rentalPlaceEditText.getText().toString();
                 capacity = capacityEditText.getText().toString();
@@ -103,17 +88,18 @@ public class AddCarActivity extends AppCompatActivity {
         });
     }
 
+    // Add Trailer Method
     private void addTrailer(View view){
         final HashMap<String, String> params = new HashMap<String, String>();
-        params.put("name", name);
+        params.put("trailerName", trailerName);
         params.put("license", license);
         params.put("rentalPlace", rentalPlace);
         params.put("capacity", capacity);
-        params.put("facilites", facilities);
+        params.put("facilities", facilities);
         params.put("description", description);
 
-        requestQueue = Volley.newRequestQueue(this);
-        String url = "http://101.101.209.224:3001/api/pickt/trailers/registers";
+        String url = "http://101.101.209.224:3001/api/pickt/trailers";
+        final String token = sharedPreferenceClass.getValue_string("token");
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override
@@ -122,8 +108,9 @@ public class AddCarActivity extends AppCompatActivity {
                     // success -> true
                     if (response.getBoolean("success")) {
                         String msg = "차량 등록이 완료되었습니다.";
-                        Toast.makeText(AddCarActivity.this, msg, Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(AddCarActivity.this, MainActivity.class));
+                        Toast.makeText(AddTrailerActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        // MainActivity로 넘어가는 것
+                        startActivity(new Intent(AddTrailerActivity.this, MainActivity.class));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -137,13 +124,23 @@ public class AddCarActivity extends AppCompatActivity {
                     try {
                         String res = new String(response.data, HttpHeaderParser.parseCharset(response.headers, "utf-8"));
                         JSONObject obj = new JSONObject(res);
-                        Toast.makeText(AddCarActivity.this, obj.getString("msg"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddTrailerActivity.this, obj.getString("msg"), Toast.LENGTH_SHORT).show();
                     }catch (JSONException | UnsupportedEncodingException je){
                         je.printStackTrace();
                     }
                 }
             }
-        });
+        })
+
+        {
+           @Override
+           public Map<String, String> getHeaders() throws AuthFailureError{
+               HashMap<String, String> headers = new HashMap<>();
+               headers.put("Content-Type", "application/json");
+               headers.put("Authorization", token);
+               return headers;
+           }
+        };
 
         // request add
         RequestQueue requestQueue = Volley.newRequestQueue(this);
