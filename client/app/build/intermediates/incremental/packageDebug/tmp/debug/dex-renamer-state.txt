@@ -1,0 +1,4 @@
+#Thu Jan 28 18:46:24 KST 2021
+base.0=/Users/wnajsldkf/project/ongoing/pick_t/client/app/build/intermediates/dex/debug/mergeDexDebug/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
