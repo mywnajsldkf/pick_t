@@ -67,6 +67,17 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/costText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="sans-serif"
+                android:text="78,400원"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+
             <!--차량 정보 등-->
             <TextView
                 android:layout_width="match_parent"

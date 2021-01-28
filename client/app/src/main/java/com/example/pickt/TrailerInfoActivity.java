@@ -45,7 +45,7 @@ public class TrailerInfoActivity<JSONObjectRequest> extends AppCompatActivity {
     SharedPreferenceClass sharedPreferenceClass;
     String token;
 
-    private TextView registerTextView, rentalPlaceTextView, licenseTextView, capacityTextView, facilityTextView, descriptionTextView;
+    private TextView registerTextView, rentalPlaceTextView, licenseTextView, costTextView, capacityTextView, facilityTextView, descriptionTextView;
     private Button reserveBtn;
 
     private RequestQueue requestQueue;
@@ -69,6 +69,7 @@ public class TrailerInfoActivity<JSONObjectRequest> extends AppCompatActivity {
         registerTextView = (TextView)findViewById(R.id.RegisterText);
         rentalPlaceTextView = (TextView)findViewById(R.id.rentalPlaceText);
         licenseTextView = (TextView)findViewById(R.id.licenseText);
+        costTextView = (TextView)findViewById(R.id.costText);
         capacityTextView = (TextView)findViewById(R.id.capacityText);
         facilityTextView = (TextView)findViewById(R.id.facilityText);
         descriptionTextView = (TextView)findViewById(R.id.descriptionText);
@@ -97,6 +98,7 @@ public class TrailerInfoActivity<JSONObjectRequest> extends AppCompatActivity {
                                 registerTextView.setText(jsonObject.get("trailerName").toString());
                                 rentalPlaceTextView.setText(jsonObject.get("rentalPlace").toString());
                                 licenseTextView.setText(jsonObject.get("license").toString());
+                                costTextView.setText(jsonObject.get("cost").toString());
                                 capacityTextView.setText(jsonObject.get("capacity").toString());
                                 facilityTextView.setText(jsonObject.get("facilities").toString());
                                 descriptionTextView.setText(jsonObject.get("description").toString());

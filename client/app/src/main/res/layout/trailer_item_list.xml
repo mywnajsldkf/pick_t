@@ -67,8 +67,8 @@
                     android:lineSpacingExtra="8sp"
                     android:text="광주 전남대"></TextView>
                 
-                <!--TextView
-                    android:id="@+id/carCostText"
+                <TextView
+                    android:id="@+id/editTrailerCost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="37.5dp"
@@ -78,7 +78,7 @@
                     android:textColor="#355830"
                     android:letterSpacing="0.01"
                     android:lineSpacingExtra="4sp"
-                    android:text="74,820원~"></TextView-->
+                    android:text="74,820원~"></TextView>
             </LinearLayout>
 
         </LinearLayout>

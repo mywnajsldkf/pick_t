@@ -48,7 +48,7 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
     RecyclerView.LayoutManager mLayoutManager;
     TrailerListAdapter trailerListAdapter;
 
-    TextView trailerName, rentalPlace;
+    TextView trailerName, rentalPlace, rentalCost;
 
     public static final long DOUBLE_PRESS_INTERVAL = 250;  // milli-seconds
     public long lastPressTime;
@@ -75,6 +75,7 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
 
         trailerName = view.findViewById(R.id.editTrailerName);
         rentalPlace = view.findViewById(R.id.editRentalPlace);
+        rentalCost = view.findViewById(R.id.editTrailerCost);
 
         mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -104,6 +105,7 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
                                     jsonObject.getString("trailerName"),
                                     jsonObject.getString("license"),
                                     jsonObject.getString("rentalPlace"),
+                                    jsonObject.getString("cost"),
                                     jsonObject.getString("capacity"),
                                     jsonObject.getString("facilities"),
                                     jsonObject.getString("description")

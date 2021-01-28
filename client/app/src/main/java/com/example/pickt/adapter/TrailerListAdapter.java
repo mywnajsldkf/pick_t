@@ -52,11 +52,13 @@ public class TrailerListAdapter extends RecyclerView.Adapter<TrailerListAdapter.
         final String capacity = arrayList.get(position).getCapacity();
         final String facilities = arrayList.get(position).getFacilities();
         final String description = arrayList.get(position).getDescription();
+        final String cost = arrayList.get(position).getCost();
         final String id = arrayList.get(position).getId();
 
         // 보여주는 코드 작성
         holder.textViewName.setText(trailerName);
         holder.textViewRent.setText(rentalPlace);
+        holder.textViewCost.setText(cost);
     }
 
     @Override
@@ -66,7 +68,7 @@ public class TrailerListAdapter extends RecyclerView.Adapter<TrailerListAdapter.
 
     public class TrailerViewHolder extends RecyclerView.ViewHolder{
         CardView trailer_card;
-        TextView textViewName, textViewRent;
+        TextView textViewName, textViewRent, textViewCost;
         LinearLayout trailerBody, trailerContent;
 
         // ImageView carImage;
@@ -76,12 +78,12 @@ public class TrailerListAdapter extends RecyclerView.Adapter<TrailerListAdapter.
 
             textViewName = (TextView) itemView.findViewById(R.id.editTrailerName);
             textViewRent = (TextView) itemView.findViewById(R.id.editRentalPlace);
+            textViewCost = (TextView)itemView.findViewById(R.id.editTrailerCost);
             trailer_card = (CardView) itemView.findViewById(R.id.trailerCard);
             trailerBody = (LinearLayout) itemView.findViewById(R.id.trailerBody);
             trailerContent = (LinearLayout) itemView.findViewById(R.id.trailerContent);
 
             // carImage = itemView.findViewById(R.id.carImage);
-            // textViewCost = itemView.findViewById(R.id.carCostText);
 
             // 아이템 클릭 이벤트 핸들러 메서드에서 객체 메서드 호출
             trailer_card.setOnClickListener(new View.OnClickListener() {
