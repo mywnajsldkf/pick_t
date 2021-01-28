@@ -48,7 +48,7 @@ const reservationListSchema = new mongoose.Schema({
     required: true
   },
 
-  trailerName: {
+  trailerPhoto: {
     type: String,
     required: true
   },
