@@ -320,7 +320,7 @@ router.get('/users/:id/reservationLists', user_jwt, async(req, res, next) => {
     res.status(200).json({
       success: true,
       trailer: reservedTrailer,
-      msg: 'Successfully retrieved'
+      msg: 'Successfully retrieved'
     });
 
   } catch(error) {
@@ -336,7 +336,7 @@ router.delete('/users/:id', user_jwt, async(req, res, next) => {
     if(!user) {
       res.status(400).json({
         success: false,
-        msg: 'User not exists'
+        msg: 'User not exists '
       });
     }
 
