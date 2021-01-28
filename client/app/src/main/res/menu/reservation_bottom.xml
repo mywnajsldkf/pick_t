@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".DetailCarActivity">
+    <item
+        android:id="@+id/reserveBtn"
+        android:layout_width="115dp"
+        android:layout_height="41dp"
+        android:background="#406c3a"
+        app:showAsAction="always"
+        android:title="예약하기">
+    </item>
+
+</menu>
