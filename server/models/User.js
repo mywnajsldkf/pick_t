@@ -7,7 +7,7 @@ const likeListSchema = new mongoose.Schema({
   },
 
   trailerPhoto: {
-    type: Stirng,
+    type: String,
     required: true
   },
 
