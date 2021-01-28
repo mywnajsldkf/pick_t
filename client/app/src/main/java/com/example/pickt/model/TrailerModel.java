@@ -21,23 +21,46 @@ public class TrailerModel {
         return trailerName;
     }
 
+    public void setTrailerName(String trailerName){
+        this.trailerName = trailerName;
+    }
+
     public String getLicense(){
         return license;
+    }
+
+    public void setLicense(String license){
+        this.license = license;
     }
 
     public String getRentalPlace(){
         return rentalPlace;
     }
 
+    public void setRentalPlace(String rentalPlace){
+        this.rentalPlace = rentalPlace;
+    }
+
     public String getCapacity(){
         return capacity;
     }
 
+    public void setCapacity(String capacity){
+        this.capacity = capacity;
+    }
     public String getFacilities(){
         return facilities;
     }
 
+    public void setFacilities(String facilities){
+        this.facilities = facilities;
+    }
+
     public String getDescription(){
         return description;
+    }
+
+    public void setDescription(String description){
+        this.description = description;
     }
 }

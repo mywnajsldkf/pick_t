@@ -4,24 +4,41 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.pickt.UtilsService.SharedPreferenceClass;
+import com.example.pickt.model.TrailerModel;
 
+import org.json.JSONArray;
+//import org.json.JSONException;
+//import org.json.JSONObject;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONString;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class TrailerInfoActivity<JSONObjectRequest> extends AppCompatActivity {
 
@@ -33,7 +50,7 @@ public class TrailerInfoActivity<JSONObjectRequest> extends AppCompatActivity {
 
     private RequestQueue requestQueue;
 
-    private String trailerName, license, rentalPlace, capacity, facilities, description;
+    ArrayList<TrailerModel> arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +64,9 @@ public class TrailerInfoActivity<JSONObjectRequest> extends AppCompatActivity {
 
 
         sharedPreferenceClass = new SharedPreferenceClass(this);
+        token = sharedPreferenceClass.getValue_string("token");
 
-        registerTextView = (TextView)findViewById(R.id.registerText);
+        registerTextView = (TextView)findViewById(R.id.RegisterText);
         rentalPlaceTextView = (TextView)findViewById(R.id.rentalPlaceText);
         licenseTextView = (TextView)findViewById(R.id.licenseText);
         capacityTextView = (TextView)findViewById(R.id.capacityText);
@@ -56,10 +74,6 @@ public class TrailerInfoActivity<JSONObjectRequest> extends AppCompatActivity {
         descriptionTextView = (TextView)findViewById(R.id.descriptionText);
 
         reserveBtn = (Button)findViewById(R.id.reserveBtn);
-
-        // position값이 잘 넘어오는지 확인
-        Toast.makeText(this, Integer.toString(position),Toast.LENGTH_LONG).show();
-
 
         // 트레일러의 정보를 확인하는 함수에 id, position 을 함께 보냄
         getTrailerInfo(id, position);
@@ -69,42 +83,76 @@ public class TrailerInfoActivity<JSONObjectRequest> extends AppCompatActivity {
     private void getTrailerInfo(final String id, final int position){
         String url = "http://101.101.209.224:3001/api/pickt/trailers/"+id;
 
-
-        // JSON 형식으로 저장된 것들을 JSON으로 가져온다.
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, null,
-                new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+
                         // response 응답이 성공했을 때
                         try {
                             if (response.getBoolean("success")) {
+                                JSONObject jsonObject = response.getJSONObject("trailer");
 
-                                //getInfo(id, position);
-                                getInfo(id, position);
+                                //Log.i("check", jsonObject.get("trailerName").toString());
+
+                                registerTextView.setText(jsonObject.get("trailerName").toString());
+                                rentalPlaceTextView.setText(jsonObject.get("rentalPlace").toString());
+                                licenseTextView.setText(jsonObject.get("license").toString());
+                                capacityTextView.setText(jsonObject.get("capacity").toString());
+                                facilityTextView.setText(jsonObject.get("facilities").toString());
+                                descriptionTextView.setText(jsonObject.get("description").toString());
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        NetworkResponse response = error.networkResponse;
+                        if (error == null || error.networkResponse == null) {
+                            return;
+                        }
+
+                        String body;
+
+                        try {
+                            body = new String(error.networkResponse.data, "UTF-8");
+                            JSONObject errorObject = new JSONObject(body);
+
+                            // 토큰이 유효하지 않다.
+                            if (errorObject.getString("msg").equals("Token not valid")) {
+                                sharedPreferenceClass.clear();
+                                //startActivity(new Intent(getActivity(), LoginActivity.class));
+                                //Toast.makeText(getActivity(), "Session expired", Toast.LENGTH_SHORT).show();
+                            }
+                            //Toast.makeText(getActivity(), errorObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                        } catch (UnsupportedEncodingException | JSONException e) {
+
+                        }
                     }
         }){
-            // token 인증
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                return params;
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json");
+                headers.put("Authorization", token);
+                return headers;
             }
         };
+        // set retry policy
+        int socketTime = 3000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTime, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        jsonObjectRequest.setRetryPolicy(policy);
+
+        // request add
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(jsonObjectRequest);
     }
 
+    /*
     //데이터베이스에서 새로운 값을 가져온다.
     private void getInfo(String id, int position){
-        //Toast.makeText(this, id,Toast.LENGTH_LONG).show();
-        // Toast.makeText(this, position, Toast.LENGTH_LONG).show();
-        Toast.makeText(this, Integer.toString(position),Toast.LENGTH_LONG).show();
     }
+     */
 }
