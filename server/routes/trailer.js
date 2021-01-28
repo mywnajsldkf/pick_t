@@ -68,6 +68,7 @@ router.get('/trailers', user_jwt, async(req,res,next) => {
 router.get('/trailers/:id', user_jwt, async(req, res, next) => {
   try {
     let trailer = await Trailer.findById(req.params.id);
+    const user = req.user.id;
 
     if(!trailer) {
       res.status(400).json({
@@ -78,6 +79,7 @@ router.get('/trailers/:id', user_jwt, async(req, res, next) => {
 
     res.status(200).json({
       success: true,
+      user: user,
       trailer: trailer,
       msg: 'Successfully fetched'
     });
