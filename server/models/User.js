@@ -22,7 +22,7 @@ const likeListSchema = new mongoose.Schema({
   },
 
   cost: {
-    type: Number,
+    type: String,
     required: true
   },
 
@@ -69,7 +69,7 @@ const reservationListSchema = new mongoose.Schema({
   },
 
   cost: {
-    type: Number,
+    type: String,
     required: true
   }
 });

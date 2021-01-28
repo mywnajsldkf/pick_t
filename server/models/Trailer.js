@@ -32,7 +32,7 @@ const trailerSchema = new mongoose.Schema({
   },
 
   cost: {
-    type: Number,
+    type: String,
     required: true
   },
 
