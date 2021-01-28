@@ -41,6 +41,7 @@ router.post('/trailers', user_jwt, async(req, res, next) => {
 router.get('/trailers', user_jwt, async(req,res,next) => {
   try {
     const trailers = await Trailer.find();
+    const user = req.user.id;
 
     if(trailers.length == 0) {
       res.status(400).json({
@@ -52,6 +53,7 @@ router.get('/trailers', user_jwt, async(req,res,next) => {
     res.status(200).json({
       success: true,
       totalNumberOfTrailers: trailers.length,
+      user: user,
       trailer: trailers,
       msg: 'Successfully fetched'
     });
