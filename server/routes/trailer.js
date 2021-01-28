@@ -41,7 +41,9 @@ router.post('/trailers', user_jwt, async(req, res, next) => {
 router.get('/trailers', user_jwt, async(req,res,next) => {
   try {
     const trailers = await Trailer.find();
+
     const user = req.user.id;
+    console.log(user);
 
     if(trailers.length == 0) {
       res.status(400).json({
