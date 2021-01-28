@@ -1,0 +1,64 @@
+com/example/pickt/model/TrailerModel.java
+ com.example.pickt.model.TrailerModel
+com/example/pickt/UtilsService/SharedPreferenceClass.java
+ com.example.pickt.UtilsService.SharedPreferenceClass
+com/example/pickt/BuildConfig.java
+ com.example.pickt.BuildConfig
+com/example/pickt/MainActivity.java
+ com.example.pickt.MainActivity
+ com.example.pickt.MainActivity$1
+com/example/pickt/UtilsService/UtilService.java
+ com.example.pickt.UtilsService.UtilService
+com/example/pickt/ReservationList.java
+ com.example.pickt.ReservationList
+com/example/pickt/Home.java
+ com.example.pickt.Home
+com/example/pickt/HomeFragment.java
+ com.example.pickt.HomeFragment
+ com.example.pickt.HomeFragment$1
+ com.example.pickt.HomeFragment$2
+ com.example.pickt.HomeFragment$3
+ com.example.pickt.HomeFragment$4
+com/example/pickt/interfaces/RecyclerViewClickListener.java
+ com.example.pickt.interfaces.RecyclerViewClickListener
+com/example/pickt/LoginActivity.java
+ com.example.pickt.LoginActivity
+ com.example.pickt.LoginActivity$1
+ com.example.pickt.LoginActivity$2
+ com.example.pickt.LoginActivity$3
+ com.example.pickt.LoginActivity$4
+ com.example.pickt.LoginActivity$5
+com/example/pickt/TrailerInfoActivity.java
+ com.example.pickt.TrailerInfoActivity
+ com.example.pickt.TrailerInfoActivity$1
+ com.example.pickt.TrailerInfoActivity$2
+ com.example.pickt.TrailerInfoActivity$3
+com/example/pickt/FavoriteActivity.java
+ com.example.pickt.FavoriteActivity
+com/example/pickt/AccountFragment.java
+ com.example.pickt.AccountFragment
+ com.example.pickt.AccountFragment$1
+ com.example.pickt.AccountFragment$2
+ com.example.pickt.AccountFragment$3
+com/example/pickt/AddTrailerActivity.java
+ com.example.pickt.AddTrailerActivity
+ com.example.pickt.AddTrailerActivity$1
+ com.example.pickt.AddTrailerActivity$2
+ com.example.pickt.AddTrailerActivity$3
+ com.example.pickt.AddTrailerActivity$4
+ com.example.pickt.AddTrailerActivity$5
+com/example/pickt/ChatFragment.java
+ com.example.pickt.ChatFragment
+com/example/pickt/adapter/TrailerListAdapter.java
+ com.example.pickt.adapter.TrailerListAdapter
+ com.example.pickt.adapter.TrailerListAdapter$TrailerViewHolder
+ com.example.pickt.adapter.TrailerListAdapter$TrailerViewHolder$1
+com/example/pickt/SignUpActivity.java
+ com.example.pickt.SignUpActivity
+ com.example.pickt.SignUpActivity$1
+ com.example.pickt.SignUpActivity$2
+ com.example.pickt.SignUpActivity$3
+ com.example.pickt.SignUpActivity$4
+com/example/pickt/SplashActivity.java
+ com.example.pickt.SplashActivity
+ com.example.pickt.SplashActivity$1
