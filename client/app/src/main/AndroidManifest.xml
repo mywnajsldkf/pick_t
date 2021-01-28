@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".TrailerInfoAcitivity"></activity>
+        <activity android:name=".TrailerInfoActivity"></activity>
         <activity android:name=".FavoriteActivity" />
         <activity android:name=".ReservationList" />
         <activity android:name=".AddTrailerActivity" />

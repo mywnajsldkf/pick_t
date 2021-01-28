@@ -165,32 +165,46 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
         requestQueue.add(jsonObjectRequest);
     }
 
+    // 관심 차량 등록
+    public void onItemDoubleClick(){
+        Toast.makeText(getContext(), "관심 차량으로 등록되었습니다.", Toast.LENGTH_SHORT).show();
+        mHasDoubleClicked = true;
+    }
+
+
+
+    public void onItemOneClick(final String id, final int position) {
+        mHasDoubleClicked = false;
+
+        Handler tabHandler = new Handler() {
+            public void handleMessage(Message m) {
+                if (!mHasDoubleClicked) {
+                    Intent intentLoadActivity = new Intent(getActivity(), TrailerInfoActivity.class);
+
+                    intentLoadActivity.putExtra("id", id);
+                    intentLoadActivity.putExtra("position", position);
+                    intentLoadActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                    startActivity(intentLoadActivity);
+                }
+            }
+        };
+        Message m = new Message();
+        tabHandler.sendMessageDelayed(m, DOUBLE_PRESS_INTERVAL);
+    }
+
     @Override
    public boolean onItemClick(int position) {
         long pressTime = System.currentTimeMillis();
         // 더블 탭 -> 관심 차량 등록
         if (pressTime - lastPressTime <= DOUBLE_PRESS_INTERVAL){
-            Toast.makeText(getContext(), "관심 차량으로 등록되었습니다.", Toast.LENGTH_SHORT).show();
-            mHasDoubleClicked = true;
+            onItemDoubleClick();
         }
         // 한번 탭 -> 다음 액티비트로 전환
         else {
-            mHasDoubleClicked = false;
-            Handler tabHandler = new Handler(){
-                public void handleMessage(Message m){
-                    if (!mHasDoubleClicked){
-                        Intent intentLoadActivity = new Intent(getActivity(), TrailerInfoAcitivity.class);
-                        intentLoadActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intentLoadActivity);
-                        //Toast.makeText(getContext(), "다음 액티비티로 전환됩니다.", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            };
-            Message m = new Message();
-            tabHandler.sendMessageDelayed(m, DOUBLE_PRESS_INTERVAL);
+            onItemOneClick(arrayList.get(position).getId(), position);
         }
         lastPressTime = pressTime;
         return true;
-        // Toast.makeText(getActivity(), "Position  "+position, Toast.LENGTH_SHORT).show();
     }
 }
