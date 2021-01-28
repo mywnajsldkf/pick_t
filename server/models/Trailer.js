@@ -11,6 +11,11 @@ const trailerSchema = new mongoose.Schema({
     default: Date.now
   },
 
+  trailerPhoto: {
+    type: String,
+    required: true
+  },
+
   trailerName: {
     type: String,
     required: true
@@ -23,6 +28,11 @@ const trailerSchema = new mongoose.Schema({
 
   rentalPlace: {
     type: String,
+    required: true
+  },
+
+  cost: {
+    type: Number,
     required: true
   },
 

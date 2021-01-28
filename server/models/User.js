@@ -6,6 +6,11 @@ const likeListSchema = new mongoose.Schema({
     required: true
   },
 
+  trailerPhoto: {
+    type: Stirng,
+    required: true
+  },
+
   trailerName: {
     type: String,
     required: true
@@ -13,6 +18,11 @@ const likeListSchema = new mongoose.Schema({
 
   rentalPlace: {
     type: String,
+    required: true
+  },
+
+  cost: {
+    type: Number,
     required: true
   },
 
@@ -38,6 +48,11 @@ const reservationListSchema = new mongoose.Schema({
     required: true
   },
 
+  trailerName: {
+    type: String,
+    required: true
+  },
+
   trailerId: {
     type: String,
     required: true
@@ -50,6 +65,11 @@ const reservationListSchema = new mongoose.Schema({
 
   rentalPlace: {
     type: String,
+    required: true
+  },
+
+  cost: {
+    type: Number,
     required: true
   }
 });

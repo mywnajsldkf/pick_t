@@ -9,9 +9,11 @@ router.post('/trailers', user_jwt, async(req, res, next) => {
   try {
     const trailer = await Trailer.create({
       userId: req.user.id,
+      trailerPhoto: req.body.trailerPhoto,
       trailerName: req.body.trailerName,
       license: req.body.license,
       rentalPlace: req.body.rentalPlace,
+      cost: req.body.cost,
       capacity: req.body.capacity,
       facilities: req.body.facilities,
       description: req.body.description
@@ -102,19 +104,6 @@ router.delete('/trailers/:id', user_jwt, async(req, res, next) => {
     next(error);
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 module.exports = router;
