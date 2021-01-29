@@ -1,16 +1,19 @@
 package com.example.pickt;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,6 +52,7 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
     TrailerListAdapter trailerListAdapter;
 
     TextView trailerName, rentalPlace, rentalCost;
+    ImageView trailerImage;
 
     public static final long DOUBLE_PRESS_INTERVAL = 250;  // milli-seconds
     public long lastPressTime;
@@ -76,6 +80,7 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
         trailerName = view.findViewById(R.id.editTrailerName);
         rentalPlace = view.findViewById(R.id.editRentalPlace);
         rentalCost = view.findViewById(R.id.editTrailerCost);
+        trailerImage = view.findViewById(R.id.trailerImage);
 
         mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -91,6 +96,7 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
         String url = "http://101.101.209.224:3001/api/pickt/trailers";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -108,7 +114,8 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
                                     jsonObject.getString("cost"),
                                     jsonObject.getString("capacity"),
                                     jsonObject.getString("facilities"),
-                                    jsonObject.getString("description")
+                                    jsonObject.getString("description"),
+                                    jsonObject.getString("trailerPhoto")
                             );
 
                             arrayList.add(trailerModel);
