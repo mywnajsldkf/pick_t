@@ -1,11 +1,17 @@
 package com.example.pickt;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +26,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.pickt.UtilsService.SharedPreferenceClass;
 import com.example.pickt.model.TrailerModel;
 
@@ -34,11 +43,15 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 
+import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+//import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
+import android.util.Base64;
+
 
 public class TrailerInfoActivity<JSONObjectRequest> extends AppCompatActivity {
 
@@ -46,11 +59,14 @@ public class TrailerInfoActivity<JSONObjectRequest> extends AppCompatActivity {
     String token;
 
     private TextView registerTextView, rentalPlaceTextView, licenseTextView, costTextView, capacityTextView, facilityTextView, descriptionTextView;
+    private ImageView trailerImageView;
     private Button reserveBtn;
 
     private RequestQueue requestQueue;
 
     ArrayList<TrailerModel> arrayList;
+
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +89,7 @@ public class TrailerInfoActivity<JSONObjectRequest> extends AppCompatActivity {
         capacityTextView = (TextView)findViewById(R.id.capacityText);
         facilityTextView = (TextView)findViewById(R.id.facilityText);
         descriptionTextView = (TextView)findViewById(R.id.descriptionText);
+        trailerImageView = (ImageView)findViewById(R.id.addImageView);
 
         reserveBtn = (Button)findViewById(R.id.reserveBtn);
 
@@ -102,6 +119,31 @@ public class TrailerInfoActivity<JSONObjectRequest> extends AppCompatActivity {
                                 capacityTextView.setText(jsonObject.get("capacity").toString());
                                 facilityTextView.setText(jsonObject.get("facilities").toString());
                                 descriptionTextView.setText(jsonObject.get("description").toString());
+
+                                // trailerTextView.setText(jsonObject.get("trailerPhoto").toString());
+                                String trailerTextView = jsonObject.get("trailerPhoto").toString();
+
+                                // byte[] encodeByte = Base64.decode(trailerTextView, Base64.DEFAULT);
+                                // Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte,0,encodeByte.length);
+
+                                byte[] encodeByte = Base64.decode(trailerTextView, Base64.DEFAULT);
+                                Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte,0,encodeByte.length);
+                                trailerImageView.setImageBitmap(bitmap);
+                                //BitmapFactory.Options options = new BitmapFactory.Options();
+                                //options.inSampleSize = 2;
+                                //Bitmap bitmap = BitmapFactory.decodeStream(inStream);
+                                //trailerImageView.setImageBitmap(bitmap);
+
+                                /*
+                                Glide.with(context).asBitmap().load(bitmap)
+                                        .into(new SimpleTarget<Bitmap>() {
+                                            @Override
+                                            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                                ImageView trailerImage = null;
+                                                trailerImage.setImageBitmap(resource);
+                                            }
+                                        });
+                                 */
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

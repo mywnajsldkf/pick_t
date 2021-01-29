@@ -1,9 +1,9 @@
 package com.example.pickt.model;
 
 public class TrailerModel {
-    private String id, trailerName, rentalPlace, cost, license, capacity, facilities, description;
+    private String id, trailerName, rentalPlace, cost, license, capacity, facilities, description, trailerPhoto;
 
-    public TrailerModel(String id, String trailerName, String license, String rentalPlace, String cost, String capacity, String facilities, String description){
+    public TrailerModel(String id, String trailerName, String license, String rentalPlace, String cost, String capacity, String facilities, String description, String trailerPhoto){
         this.id = id;
         this.trailerName = trailerName;
         this.license = license;
@@ -12,6 +12,7 @@ public class TrailerModel {
         this.capacity = capacity;
         this.facilities = facilities;
         this.description = description;
+        this.trailerPhoto = trailerPhoto;
     }
 
     public String getId(){
@@ -71,5 +72,13 @@ public class TrailerModel {
 
     public void setDescription(String description){
         this.description = description;
+    }
+
+    public String getTrailerPhoto(){
+        return trailerPhoto;
+    }
+
+    public void setTrailerPhoto(String trailerPhoto){
+        this.trailerPhoto = trailerPhoto;
     }
 }
