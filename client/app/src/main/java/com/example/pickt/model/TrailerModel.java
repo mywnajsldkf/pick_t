@@ -1,10 +1,11 @@
 package com.example.pickt.model;
 
 public class TrailerModel {
-    private String id, trailerName, rentalPlace, cost, license, capacity, facilities, description, trailerPhoto;
+    private String id, userId, trailerName, rentalPlace, cost, license, capacity, facilities, description, trailerPhoto;
 
-    public TrailerModel(String id, String trailerName, String license, String rentalPlace, String cost, String capacity, String facilities, String description, String trailerPhoto){
+    public TrailerModel(String id, String userId, String trailerName, String license, String rentalPlace, String cost, String capacity, String facilities, String description, String trailerPhoto){
         this.id = id;
+        this.userId = userId;
         this.trailerName = trailerName;
         this.license = license;
         this.rentalPlace = rentalPlace;
@@ -18,6 +19,10 @@ public class TrailerModel {
     public String getId(){
         return id;
     }
+
+    public String getUserId(){ return userId; }
+
+    public void setUserId(String userId) { this.userId = userId; }
 
     public String getTrailerName(){
         return trailerName;

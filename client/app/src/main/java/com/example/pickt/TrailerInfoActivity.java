@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,7 +23,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
+import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -62,6 +65,7 @@ public class TrailerInfoActivity<JSONObjectRequest> extends AppCompatActivity {
     private ImageView trailerImageView;
     private Button reserveBtn;
 
+    static String guestId, hostId, trailerPhoto, trailerId, trailerName, rentalPlace, cost;
     private RequestQueue requestQueue;
 
     ArrayList<TrailerModel> arrayList;
@@ -95,6 +99,68 @@ public class TrailerInfoActivity<JSONObjectRequest> extends AppCompatActivity {
 
         // 트레일러의 정보를 확인하는 함수에 id, position 을 함께 보냄
         getTrailerInfo(id, position);
+
+        reserveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reserveTrailer();
+            }
+        });
+    }
+
+    private void reserveTrailer() {
+        final HashMap<String, String> body = new HashMap<String, String>();
+        body.put("guestId", guestId);
+        body.put("hostId", hostId);
+        body.put("trailerPhoto", trailerPhoto);
+        body.put("trailerId", trailerId);
+        body.put("trailerName", trailerName);
+        body.put("rentalPlace", rentalPlace);
+        body.put("cost", cost);
+        String url = "http://101.101.209.224:3001/api/pickt/users/" + guestId + "/reservationLists";
+
+        final String token = sharedPreferenceClass.getValue_string("token");
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, new JSONObject(body), new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    // success -> true
+                    if (response.getBoolean("success")) {
+                        String msg = "예약 완료";
+                        Toast.makeText(TrailerInfoActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(TrailerInfoActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                NetworkResponse response = error.networkResponse;
+                if (error instanceof ServerError && response != null){
+                    try {
+                        String res = new String(response.data, HttpHeaderParser.parseCharset(response.headers, "utf-8"));
+                        JSONObject obj = new JSONObject(res);
+                        Toast.makeText(TrailerInfoActivity.this, obj.getString("msg"), Toast.LENGTH_SHORT).show();
+                    }catch (JSONException | UnsupportedEncodingException je){
+                        je.printStackTrace();
+                    }
+                }
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError{
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json");
+                headers.put("Authorization", token);
+                return headers;
+            }
+        };
+        // request add
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(jsonObjectRequest);
     }
 
     // getTrailerInfo
@@ -109,8 +175,16 @@ public class TrailerInfoActivity<JSONObjectRequest> extends AppCompatActivity {
                         try {
                             if (response.getBoolean("success")) {
                                 JSONObject jsonObject = response.getJSONObject("trailer");
+//                                guestId = response.getString("user");
+//
+//                                //Log.i("check", jsonObject.get("trailerName").toString());
+//                                hostId = jsonObject.getString("userId").toString();
+//                                trailerPhoto = jsonObject.getString("trailerPhoto").toString();
+//                                trailerId = jsonObject.getString("trailerId").toString();
+//                                trailerName = jsonObject.getString("trailerName").toString();
+//                                rentalPlace = jsonObject.getString("rentalPlace").toString();
+//                                cost = jsonObject.getString("cost").toString();
 
-                                //Log.i("check", jsonObject.get("trailerName").toString());
 
                                 registerTextView.setText(jsonObject.get("trailerName").toString());
                                 rentalPlaceTextView.setText(jsonObject.get("rentalPlace").toString());

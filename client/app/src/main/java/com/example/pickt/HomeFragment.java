@@ -25,7 +25,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
+import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.pickt.UtilsService.SharedPreferenceClass;
@@ -53,6 +55,7 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
 
     TextView trailerName, rentalPlace, rentalCost;
     ImageView trailerImage;
+    static String userId;
 
     public static final long DOUBLE_PRESS_INTERVAL = 250;  // milli-seconds
     public long lastPressTime;
@@ -102,12 +105,14 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
                 try {
                     if (response.getBoolean("success")) {
                         JSONArray jsonArray = response.getJSONArray("trailer");
+                        userId = response.getString("user");
 
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                             TrailerModel trailerModel = new TrailerModel(
                                     jsonObject.getString("_id"),
+                                    jsonObject.getString("userId"),
                                     jsonObject.getString("trailerName"),
                                     jsonObject.getString("license"),
                                     jsonObject.getString("rentalPlace"),
@@ -175,9 +180,62 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
     }
 
     // 관심 차량 등록
-    public void onItemDoubleClick(){
+    public void onItemDoubleClick(final String id, final int position){
         Toast.makeText(getContext(), "관심 차량으로 등록되었습니다.", Toast.LENGTH_SHORT).show();
         mHasDoubleClicked = true;
+        resgisterLikedTrailer(id, position);
+    }
+    private void resgisterLikedTrailer(final String id, final int position) {
+        final HashMap<String, String> body = new HashMap<String, String>();
+        body.put("guestId", userId);
+        body.put("hostId", arrayList.get(position).getUserId());
+        body.put("trailerPhoto", arrayList.get(position).getTrailerPhoto());
+        body.put("trailerId", arrayList.get(position).getId());
+        body.put("trailerName", arrayList.get(position).getTrailerName());
+        body.put("rentalPlace", arrayList.get(position).getRentalPlace());
+        body.put("cost", arrayList.get(position).getCost());
+        String url = "http://101.101.209.224:3001/api/pickt/users/" + userId + "/likeLists";
+        final String token = sharedPreferenceClass.getValue_string("token");
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, new JSONObject(body), new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    // success -> true
+                    if (response.getBoolean("success")) {
+                        String msg = "관심목록 등 완료";
+                        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                NetworkResponse response = error.networkResponse;
+                if (error instanceof ServerError && response != null){
+                    try {
+                        String res = new String(response.data, HttpHeaderParser.parseCharset(response.headers, "utf-8"));
+                        JSONObject obj = new JSONObject(res);
+                        Toast.makeText(getActivity(), obj.getString("msg"), Toast.LENGTH_SHORT).show();
+                    }catch (JSONException | UnsupportedEncodingException je){
+                        je.printStackTrace();
+                    }
+                }
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError{
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json");
+                headers.put("Authorization", token);
+                return headers;
+            }
+        };
+        // request add
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(jsonObjectRequest);
     }
 
 
@@ -207,7 +265,7 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
         long pressTime = System.currentTimeMillis();
         // 더블 탭 -> 관심 차량 등록
         if (pressTime - lastPressTime <= DOUBLE_PRESS_INTERVAL){
-            onItemDoubleClick();
+            onItemDoubleClick(arrayList.get(position).getId(), position);
         }
         // 한번 탭 -> 다음 액티비트로 전환
         else {
